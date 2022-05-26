@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+</head>
+<body>
+	<div id="regForm">
+		<h2 id="heading">Sign Up</h2>
+		<form method="POST" action="register">
+			<input type="text" class="newlineInput" name="fname" placeholder="First Name">
+			<input type="text" class="newlineInput" name="lname" placeholder="Last Name">
+			<input id="uname" class="newlineInput" name="uname" placeholder="Username">
+			<input class="newlineInput" type="password" name="pwd1" placeholder="Password">
+			<input class="newlineInput" type="password" name="pwd2" placeholder="Password Again">
+			<button class="newlineInput">Sign Up</button>
+			
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for msg in messages %}
+							<div id="errorMsg">{{msg}}</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			
+			<div id="line"></div>
+		</form>
+		<a href="/">Have an account?</a>
+	</div>
+</body>
+</html>

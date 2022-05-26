@@ -1,0 +1,111 @@
+@font-face {
+    font-family: Consolas;
+    src: url(../fonts/CONSOLA.TTF);
+}
+
+@font-face {
+    font-family: IBM;
+    src: url(../fonts/IBMPlexMono-Text.ttf);
+}
+
+
+
+html {
+	background: #F0F2F5;
+	font-family: IBM;
+}
+
+input {
+	display: block;
+	width: 70%;
+	margin: auto;
+	margin-bottom: 3%;
+	font-family: IBM;
+	padding: 5px;
+	font-size: 1em;
+}
+
+form button {
+	width: 70%;
+	background-color: #1877f2;
+	border: none;
+	padding: 6px;
+	font-family: IBM;
+	color: white;
+	font-size: 1em;
+}
+
+button:hover {
+	background-color: #1877d2;
+}
+
+form {
+	border: none;
+	width: 30%;
+	padding: 5px;
+	text-align: center;
+	margin: auto;
+	margin-top: 10%;
+}
+
+a {
+	display: block;
+	margin: 3% 0;
+	color: #1877f2;
+	text-decoration: none;
+}
+
+h1 {
+	color: #1877F2;
+}
+
+#register {
+	
+	background-color:#41c926;
+	margin: auto;
+	display: block;
+	padding: 5px 25px;
+	border: none;
+	font-family: IBM;
+	color: white;
+}
+
+#register:hover {
+	background-color:#36A420; 
+}
+
+#line {
+	border-top: 1px solid #DADDE1;
+	width: 80%;
+	margin: auto;
+	margin-bottom: 3%;
+
+}
+
+#outerBox {
+	
+	margin: auto;
+	padding-bottom: 5%;
+	box-shadow: 1px 1px 5px 3px #888888;
+	background-color: #ffffff;
+	
+}
+
+@media all and (max-width: 600px) {
+
+	form {
+		width: 80%;
+		text-align: center;
+		margin-top: 40%;
+		
+	}
+	input {
+		margin: 5% auto;
+		
+	}
+
+
+}
+
+
+
