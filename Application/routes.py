@@ -1,5 +1,5 @@
-from flask import current_app as app
-from flask import render_template, request, flash
+from flask import current_app as app, session
+from flask import render_template, request, flash, redirect
 from .models import db, User
 
 @app.route("/", methods=['GET', 'POST'])
@@ -7,15 +7,20 @@ def home():
 	if request.method == "POST":
 		uname = request.form['username']
 		pwd = request.form['password']
-		User = User.query.filter_by(UserName = uname).first()
-		if User:
-			if pwd != User.Password:
+		user = User.query.filter_by(UserName = uname).first()
+		if user:
+			if pwd != user.Password:
 				flash('Wrong Password')
 			else:
+				session['uname'] = uname
 				return render_template('home.html')
 		else:
+			print('Hahaha')
 			flash('Username doesn\'t Exists')
-	return render_template('login.html')
+	if 'uname' in session:
+		return render_template('home.html')
+	else:
+		return render_template('login.html')
 
 
 @app.route("/register", methods=['GET','POST'])
@@ -39,3 +44,9 @@ def register():
 			db.session.commit()
 			flash('Account Created Successfully')
 	return render_template('register.html')
+
+@app.route("/logout")
+def logout():
+	session.pop('uname', None)
+	session.pop('_flashes', None)
+	return redirect('/')

@@ -17,7 +17,7 @@ html {
 
 input {
 	display: block;
-	width: 70%;
+	width: 100%;
 	margin: auto;
 	margin-bottom: 3%;
 	font-family: IBM;
@@ -74,6 +74,10 @@ h1 {
 	background-color:#36A420; 
 }
 
+#errorMsg {
+	color: red;
+}
+
 #line {
 	border-top: 1px solid #DADDE1;
 	width: 80%;
@@ -88,6 +92,7 @@ h1 {
 	padding-bottom: 5%;
 	box-shadow: 1px 1px 5px 3px #888888;
 	background-color: #ffffff;
+	width: 70%;
 	
 }
 
@@ -101,7 +106,12 @@ h1 {
 	}
 	input {
 		margin: 5% auto;
+		width: 90%;
 		
+	}
+
+	#outerBox {
+		width: 100%;
 	}
 
 

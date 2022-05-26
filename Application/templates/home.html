@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+	<title>Home</title>
+</head>
+<body>
+	{% extends "base.html" %}
+	{% block sideBar %}
+		<div id="sideBar">
+			<div id="icons">
+				
+			</div>
+			<div id="chatList">
+				
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block chat %}
+		<div id="chatWindow">
+			
+		</div>
+	{% endblock %}
+</body>
+</html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -9,14 +10,24 @@
 </head>
 <body>
 	<div id="outerBox">
-		<form>
-			<h1>orkut</h1>
+		<form method="POST">
+			<h1>orkut</h1>	
 			<input type="text" name="username" placeholder="Username">
-			<input type="text" name="password" placeholder="Password">
+			<input type="password" name="password" placeholder="Password">
 			<button>Login</button>
 			<a href="reset">Trouble ?</a>
 			<div id="line"></div>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for msg in messages %}
+						<div id="errorMsg">{{msg}}</div>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			
 		</form>
+
+
 		<button id="register" onclick="location.href='register';">Create Account</button>
 	</div>
 </body>
