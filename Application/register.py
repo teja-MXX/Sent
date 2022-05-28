@@ -1,5 +1,8 @@
 from flask import Blueprint, request, render_template, flash
+from werkzeug.utils import secure_filename
 import datetime
+import os
+from flask import current_app as app
 from Application.models import db,User
 
 registerBP = Blueprint('registerBP', __name__)
@@ -15,7 +18,8 @@ def register():
 		dob = datetime.datetime(int(dob[0]), int(dob[1]), int(dob[2]))
 		pwd1 = request.form['pwd1']
 		pwd2 = request.form['pwd2']
-
+		DP = request.files['file']
+		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname))
 		checkUname = User.query.filter_by(UserName = uname).first()
 		print(checkUname)
 		if checkUname:
