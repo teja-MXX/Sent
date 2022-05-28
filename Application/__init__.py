@@ -9,6 +9,9 @@ def init_app():
 	db.init_app(app)
 
 	with app.app_context():
-		from . import routes
+		from .HOME.home import homeBP
+		from .REGISTER.register import registerBP
+		app.register_blueprint(homeBP)
+		app.register_blueprint(registerBP)
 		db.create_all()
 		return app

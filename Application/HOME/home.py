@@ -1,9 +1,13 @@
 from flask import current_app as app, session
-from flask import render_template, request, flash, redirect
-from .models import db, User
+from flask import render_template, request, flash, redirect, flash
+from flask import Blueprint
+from Application.models import db, User
 import datetime
 
-@app.route("/", methods=['GET', 'POST'])
+homeBP = Blueprint('homeBP',__name__, 
+			template_folder='templates', static_folder='static')
+
+@homeBP.route("/", methods=['GET', 'POST'])
 def home():
 	if request.method == "POST":
 		uname = request.form['username']
@@ -27,30 +31,7 @@ def home():
 		return render_template('login.html')
 
 
-@app.route("/register", methods=['GET','POST'])
-def register():
-	if request.method == "POST":
-		fname = request.form['fname']
-		lname = request.form['lname']
-		uname = request.form['uname']
-		dob = request.form['dob'].split("-")
-		#dob 1212-12-12
-		dob = datetime.datetime(int(dob[0]), int(dob[1]), int(dob[2]))
-		pwd1 = request.form['pwd1']
-		pwd2 = request.form['pwd2']
 
-		checkUname = User.query.filter_by(UserName = uname).first()
-		print(checkUname)
-		if checkUname:
-			flash('Username Already Exists')
-		elif pwd1 != pwd2:
-			flash('Passwords don\'t match')
-		else:
-			newUser = User(fname, lname, uname, dob, pwd1)
-			db.session.add(newUser)
-			db.session.commit()
-			flash('Account Created Successfully')
-	return render_template('register.html')
 
 @app.route("/logout")
 def logout():
