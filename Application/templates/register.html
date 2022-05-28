@@ -10,11 +10,13 @@
 	<div id="regForm">
 		<h2 id="heading">Sign Up</h2>
 		<form method="POST" action="register">
-			<input type="text" class="newlineInput" name="fname" placeholder="First Name">
-			<input type="text" class="newlineInput" name="lname" placeholder="Last Name">
-			<input id="uname" class="newlineInput" name="uname" placeholder="Username">
-			<input class="newlineInput" type="password" name="pwd1" placeholder="Password">
-			<input class="newlineInput" type="password" name="pwd2" placeholder="Password Again">
+			<input type="text" class="newlineInput" name="fname" placeholder="First Name" required>
+			<input type="text" class="newlineInput" name="lname" placeholder="Last Name" required>
+			<input id="uname" class="newlineInput" name="uname" placeholder="Username" required>
+			<input type="text" name="dob" placeholder="Date of Birth"
+                    onfocus="(this.type='date')" required>
+			<input class="newlineInput" type="password" name="pwd1" placeholder="Password" required>
+			<input class="newlineInput" type="password" name="pwd2" placeholder="Password Again" required>
 			<button class="newlineInput">Sign Up</button>
 			
 				{% with messages = get_flashed_messages() %}
