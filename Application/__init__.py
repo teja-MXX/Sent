@@ -9,9 +9,13 @@ def init_app():
 	db.init_app(app)
 
 	with app.app_context():
-		from .HOME.home import homeBP
-		from .REGISTER.register import registerBP
+		from .home import homeBP
+		from .chat import chatBP
+		from .register import registerBP
+		from .addFriends import friendsBP
+		app.register_blueprint(chatBP)
 		app.register_blueprint(homeBP)
 		app.register_blueprint(registerBP)
+		app.register_blueprint(friendsBP)
 		db.create_all()
 		return app
