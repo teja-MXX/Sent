@@ -13,3 +13,9 @@ def friends():
 		print("FCK")
 		print(friends)
 		return render_template('friends.html', userDetails = user, friendAccounts = friends)
+
+@friendsBP.route("/profile/<string:uname>")
+def profileVisit(uname):
+	user = User.query.filter_by(UserName = uname).first()
+	dob = user.DOB.strftime('%d %B %Y')
+	return render_template('home.html', userDetails = user, Birthday = dob)

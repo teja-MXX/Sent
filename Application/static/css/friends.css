@@ -7,16 +7,19 @@ h1 {
 	color: #1877F2;
 	margin-left: 20px;
 	font-family: IBM;
+
 }
 
 .profile {
 	margin-left: 20px;
 	margin-right: 10px;
 	height: fit-content;
-	margin-bottom: 5px;
-	width: fit-content;
+	margin-bottom: 15px;
 	display: inline-block;
-	padding: 4px;
+	width: 240px;
+	padding: 2px;
+	padding-left: 3px;
+	padding-bottom: 0px;
 	padding-right: 15px;
 	box-shadow: 1px 1px 5px 3px #888888;
 }
@@ -24,31 +27,38 @@ h1 {
 .profile:hover {
 	background-color: #1877F2;
 	color: white;
+
 }
 
 
 .profilePic {
 	height: 50px;
 	width: 50px;
-	margin-left: 0vh;	
+	margin-left: 0.4vh;
+	/*background-color: black;*/
+	float: left;
 	padding-top: 4px;
 }
 
 .nameRequest {
-	float: right;
-	margin-left: 10px;
+	/*background-color: red;*/
+	margin-left: 65px;
 	
 }
 
 h5 {
 	display: inline-block;
-	margin-top: 20px;
-	margin-right: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	/*background-color: green;*/
+	/*text-align: left;*/
+;
 }
 
 button {
 	float: right;
-	margin-top: 15px;
+	margin-top: 20px;
+	margin-left: 15px;
 	background-color: transparent;
 	border: none;
 }
