@@ -18,4 +18,4 @@ def friends():
 def profileVisit(uname):
 	user = User.query.filter_by(UserName = uname).first()
 	dob = user.DOB.strftime('%d %B %Y')
-	return render_template('home.html', userDetails = user, Birthday = dob)
+	return render_template('home.html', userDetails = user, Birthday = dob, Identity = user.FirstName)

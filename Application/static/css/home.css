@@ -7,6 +7,12 @@ html {
 	font-family: 'Open Sans', sans-serif;
 }
 
+h1 {
+	color: #1877F2;
+	font-family: IBM;
+	margin-bottom: 10px;
+}
+
 #profile {
 	text-align: center;
 	font-size: 1.1em;
@@ -123,4 +129,33 @@ svg:hover {
 	margin-top: 10%;
 }
 
+/*PROFILE AREA*/
 
+.leftPadding {
+	margin-left: 20px;
+}
+
+
+#uploadPhoto {
+	width: 250px;
+	height: 150px;
+	border: 1px solid;
+	box-shadow: 1px 1px 5px 3px #888888;
+	margin-bottom: 6px;
+}
+
+.uploadButton {
+	width: 250.5px;
+	margin-left: 0px;
+	margin-top: 0px;
+	height: 150.5px;
+	/*border: transparent;
+	/*border: none;*/
+	font-size: 13px;
+}
+
+#add {
+	display: block;
+	margin-left: 103px;
+	margin-bottom: 5px;
+}
