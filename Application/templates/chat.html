@@ -1,1 +1,19 @@
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/chat.css')}}">
+<script type="text/javascript" src="{{url_for('static', filename='js/userSearch.js')}}"></script>
 {% extends 'base.html' %}
+
+
+{% block sideBar %}
+	<div id="userSearch">
+		<input id="searchBox" type="text" name="" placeholder="Search">	
+	</div>
+
+	<div id="chatList">
+<!-- 		<div class="searchResults">
+			<p>Hshs</p>
+		</div> -->
+	</div>
+
+{% endblock %}
+
+

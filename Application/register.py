@@ -29,6 +29,14 @@ def register():
 		else:
 			newUser = User(fname, lname, uname, dob, pwd1)
 			db.session.add(newUser)
+			f = open('./Application/static/profiles/Users','a')
+			f.write(newUser.FirstName + " " + newUser.LastName +"\n")
+			f.close()
+
+			f = open('./Application/static/profiles/UserNames','a')
+			f.write(newUser.UserName +"\n")
+			f.close()
+
 			db.session.commit()
 			flash('Account Created Successfully')
 	return render_template('register.html')

@@ -1,4 +1,4 @@
-from flask import current_app as app, session
+from flask import current_app as app, session, jsonify
 from flask import render_template, request, flash, redirect, flash
 from flask import Blueprint
 from Application.models import db, User
@@ -28,6 +28,7 @@ def home():
 		dob = user.DOB.strftime('%d %B %Y')
 		return render_template('home.html', userDetails = user, Birthday = dob)
 	else:
+
 		return render_template('login.html')
 
 

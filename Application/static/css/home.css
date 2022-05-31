@@ -3,13 +3,23 @@
     src: url(../fonts/IBMPlexMono-Text.ttf);
 }
 
+@font-face {
+	font-family: Consola;
+    src: url(../fonts/CONSOLA.TTF);
+}
+
+@font-face {
+	font-family: red;
+    src: url(../fonts/red.ttf);
+}
+
 html {
 	font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
 	color: #1877F2;
-	font-family: IBM;
+	font-family: Consola;
 	margin-bottom: 10px;
 }
 
@@ -43,9 +53,10 @@ img {
 }
 
 #Name {
-	margin-left: 12.5vh;
-	margin-top: 1px;
+	margin-left: 13vh;
+	margin-top: 5px;
 	color: #1877F2;
+	font-family: IBM;
 }
 
 
