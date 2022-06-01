@@ -44,9 +44,18 @@ def imageUPLOAD():
 		image.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))
 		return redirect("/")
 
+@homeBP.route("/dpChange", methods=["POST"])
+def dpChange():
+	if request.method == "POST":
+		DP = request.files['dp']
+		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg"))
+		return redirect("/")
 
 
-
+@homeBP.route("/dpRemove")
+def dpRemove():
+	os.remove(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg"))
+	return redirect("/")
 
 @app.route("/logout")
 def logout():
