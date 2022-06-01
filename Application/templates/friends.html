@@ -2,11 +2,12 @@
 
 {% extends 'base.html' %}
 
+{% block sideBar %}
+	<input type="text" name="" placeholder="Search">
+{% endblock %}
+
 {% block chat %}
 	<h1>Add Friends</h1>
-
-
-
 	{% with friends = friendAccounts %}
 		{% if friends %}
 			{% for user in friends %}

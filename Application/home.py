@@ -1,6 +1,9 @@
 from flask import current_app as app, session, jsonify
 from flask import render_template, request, flash, redirect, flash
 from flask import Blueprint
+import os
+from os.path import exists
+import random
 from Application.models import db, User
 import datetime
 
@@ -30,6 +33,17 @@ def home():
 	else:
 
 		return render_template('login.html')
+
+@homeBP.route("/imageUpload", methods=["GET", "POST"])
+def imageUPLOAD():
+	if request.method == "POST":
+		image = request.files['imag']
+		fileName = str(random.randint(1,1000000000)) + ".jpg"
+		while(exists(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))):
+			fileName = str(random.randint(1,1000000000)) + ".jpg"
+		image.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))
+		return redirect("/")
+
 
 
 

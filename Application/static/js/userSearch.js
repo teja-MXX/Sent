@@ -36,6 +36,6 @@ function ale(e){
   			})
   	}
 	else{
-
+		searchBox.innerHTML = ""
 	}
 }

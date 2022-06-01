@@ -17,8 +17,9 @@ def searchResults(searchInput):
 	details = User.query.filter_by(UserName = session['uname']).first()
 	searchInput = searchInput.split(" ")
 	if len(searchInput) == 2:
-		userSearch = User.query.filter((User.FirstName.like(searchInput[0])) | (User.LastName.like(searchInput[1])) | (User.FirstName.like(searchInput[1])) | (User.LastName.like(searchInput[0])))
-		print(userSearch)
+		userSearch = User.query.filter(User.FirstName == searchInput[0],User.LastName == searchInput[1]).all()
+		if not userSearch:
+			userSearch = User.query.filter((User.FirstName.like(searchInput[0])) | (User.LastName.like(searchInput[1])) | (User.FirstName.like(searchInput[1])) | (User.LastName.like(searchInput[0])))
 		users = {}
 		for user in userSearch:
 			if user.UserName == session['uname']:
@@ -31,7 +32,6 @@ def searchResults(searchInput):
 	else:
 		value = "%{}%".format(searchInput[0])
 		userSearch = User.query.filter(User.UserName.like(value) | User.FirstName.like(value) | User.LastName.like(value) ).all()
-		print(userSearch)
 		if userSearch:
 			users = {}
 			for user in userSearch:

@@ -19,7 +19,8 @@ def register():
 		pwd1 = request.form['pwd1']
 		pwd2 = request.form['pwd2']
 		DP = request.files['file']
-		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname))
+		os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], uname))
+		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname, uname))
 		checkUname = User.query.filter_by(UserName = uname).first()
 		print(checkUname)
 		if checkUname:
@@ -29,13 +30,13 @@ def register():
 		else:
 			newUser = User(fname, lname, uname, dob, pwd1)
 			db.session.add(newUser)
-			f = open('./Application/static/profiles/Users','a')
-			f.write(newUser.FirstName + " " + newUser.LastName +"\n")
-			f.close()
+			# f = open('./Application/static/profiles/Users','a')
+			# f.write(newUser.FirstName + " " + newUser.LastName +"\n")
+			# f.close()
 
-			f = open('./Application/static/profiles/UserNames','a')
-			f.write(newUser.UserName +"\n")
-			f.close()
+			# f = open('./Application/static/profiles/UserNames','a')
+			# f.write(newUser.UserName +"\n")
+			# f.close()
 
 			db.session.commit()
 			flash('Account Created Successfully')
