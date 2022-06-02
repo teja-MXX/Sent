@@ -101,11 +101,11 @@ svg:hover {
 
 #chatWindow {
 	width: 73%;
-	height: 95.5vh;
-	padding: 2px;
+	height: 96.3vh;
+	/*padding: 2px;*/
 	display: inline-block;
 	word-wrap: break-word;
-	border: 1px solid;
+	/*border: 1px solid;*/
 	box-shadow: 1px 1px 5px 3px #888888;
 }
 
@@ -143,26 +143,28 @@ svg:hover {
 /*PROFILE AREA*/
 
 .leftPadding {
-	margin-left: 20px;
+	margin-left: 21px;
+
 }
 
 
 #uploadPhoto {
 	width: 250px;
+	margin-left: 21px;
 	height: 150px;
+	margin-top: 13px;
 	border: 1px solid;
 	box-shadow: 1px 1px 5px 3px #888888;
 	margin-bottom: 6px;
+	/*display: inline-block;*/
+
 }
 
 .uploadButton {
 	width: 250.5px;
-	margin-left: 0px;
-	margin-top: 0px;
 	height: 150.5px;
-	/*border: transparent;
-	/*border: none;*/
 	font-size: 13px;
+	margin-top: 0px;
 }
 
 #add {
@@ -191,4 +193,10 @@ svg:hover {
 
 #dpRemove:hover{
 	color: red;
+}
+
+.userPhotos {
+	display: inline-block;
+	height: 150px;
+	width: 250px;
 }

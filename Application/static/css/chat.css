@@ -66,3 +66,46 @@ p:hover {
 .chatLIST {
   background-color: white;
 }
+
+
+/*CHAT WINDOW*/
+
+#chatWindow{
+  /*background-color: red;*/
+
+
+}
+
+#UserFullName {
+  margin-top: 0px;
+  padding-left: 20px;
+  color: white;
+  padding-top: 10px;
+  background-color: #3492eb;
+  padding-bottom: 10px;
+}
+
+#msgArea {
+  width: 93%;
+  border: 1.2px solid;
+  margin-top: 48%;
+}
+
+button{
+  margin-top: 46%;
+  height: 31.5px;
+  width: 50px;
+  position: absolute;
+  bottom: 27px;
+  left: 1208px;
+}
+
+#fileUploadIcon {
+  position: absolute;
+  top: 527px;
+  left: 1224px;
+}
+
+#fileUploadIcon:hover{
+  color: black;
+}
