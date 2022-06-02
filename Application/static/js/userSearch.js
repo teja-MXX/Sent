@@ -7,14 +7,19 @@ function ale(e){
 	
 	if(e.keyCode === 13) {
 		searchBox.value = ""
+
+  	}
+	else{
+		chatListDiv = document.getElementById('chatLIST')
+		chatListDiv.innerHTML = ""
 		var obj;
-		fetch('/chat/'+searchValue)
+		fetch('/chat/'+searchValue + e.key)
   			.then(res => res.json())
   			.then(data => obj = data)
   			.then(function(){ 
 
 
-  				chatListDiv = document.getElementById('chatList')
+  				
   				for(let i=0; i<Object.keys(obj).length; i++){
 
   					console.log(Object.values(obj)[i]['FirstName'])
@@ -34,8 +39,5 @@ function ale(e){
   				
 
   			})
-  	}
-	else{
-		searchBox.innerHTML = ""
 	}
 }
