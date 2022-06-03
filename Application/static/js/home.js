@@ -5,14 +5,6 @@
 // 	socket.emit('event', { data : 'I\'m Connected', id: socket.id });
 // })
 
-hiddenInput = document.getElementById('imgupload')
-uploadButton = document.getElementById('uploadBtn')
-innerUpload = document.getElementById('innerUpload')
-uploadButton.addEventListener('click', function(){
-			hiddenInput.click()
-		})
-
-
 // DP CHANGE CODE
 
 hiddenImageInput = document.getElementById('hiddenDPInput')

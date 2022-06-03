@@ -2,6 +2,7 @@ from flask import current_app as app, session, jsonify
 from flask import render_template, request, flash, redirect, flash
 from flask import Blueprint
 import os
+from PIL import Image
 from os.path import exists
 import random
 from Application.models import db, User
@@ -41,6 +42,7 @@ def imageUPLOAD():
 		fileName = str(random.randint(1,1000000000)) + ".jpg"
 		while(exists(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))):
 			fileName = str(random.randint(1,1000000000)) + ".jpg"
+		
 		image.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))
 		return redirect("/")
 
@@ -48,7 +50,20 @@ def imageUPLOAD():
 def dpChange():
 	if request.method == "POST":
 		DP = request.files['dp']
-		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg"))
+		path = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg")
+		DP.save(path)
+		# Resizing in Image
+		i = Image.open(path)
+		width, height = i.size
+		if(height > width or height == width):
+			perc = 540 / height
+		else:
+			perc = 850 / width
+
+		height = int(height * perc)
+		width = int(width * perc)
+		resizedImage = i.resize((width, height))
+		resizedImage.save(path)
 		return redirect("/")
 
 
@@ -56,6 +71,11 @@ def dpChange():
 def dpRemove():
 	os.remove(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg"))
 	return redirect("/")
+
+@homeBP.route("/imageShow")
+def imageShowWindow():
+	return render_template("imageShow.html")
+
 
 @app.route("/logout")
 def logout():

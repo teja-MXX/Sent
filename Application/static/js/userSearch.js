@@ -34,6 +34,8 @@ function ale(e){
 					UserFullName = document.getElementById('UserFullName')
 					searchResultss.addEventListener('click', function(){
 						UserFullName.innerText = searchResultss.firstChild.innerText
+						searchBox.value = ""
+						chatListDiv.innerHTML = ""
 					})
   				}
   			})
