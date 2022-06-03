@@ -22,7 +22,7 @@ h1 {
 	color: #1877F2;
 	font-family: Consola;
 	margin-bottom: 14px;
-	margin-top: 3px;
+	margin-top: 10px;
 	/*background-color: red;*/
 	padding-left: 15px;
 }
@@ -50,8 +50,8 @@ h1 {
 }
 
 img {
-	height: 25vh;
-	width: 40vh;
+	height: 150px;
+	width: 235px;
 	margin-left: 3vh;
 	box-shadow: 1px 1px 5px 3px #888888;
 }
@@ -155,29 +155,30 @@ svg:hover {
 
 .bi-camera-fill {
 	position: absolute;
-	left: 265px;
+	left: 270px;
 	top: 180px;
-	color: grey;
+	color: #1877f2;
 }
 
 .bi-camera-fill:hover {
-	color: #1877F2;
+	color: grey;
 }
 
 #dpRemove {
 	color: grey;
 	position: absolute;
 	top: 182px;
-	left: 290px;
+	left: 295px;
+	color: red;
 }
 
 #dpRemove:hover{
-	color: red;
+	color: white;
 }
 
 .userPhotos {
 	margin-right: 1px;
 	width: 250px;
 	height: 150px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }

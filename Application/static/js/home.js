@@ -5,13 +5,20 @@
 // 	socket.emit('event', { data : 'I\'m Connected', id: socket.id });
 // })
 
+
+// DP DISPLAY CODE
+imgElement = document.getElementById('profilePicture')
+userName = document.getElementById('profile').firstElementChild.innerText
+imgElement.src = "/static/profiles/" + userName +"/"  +userName +".jpg"
+console.log("Haha "+imgElement.src)
+
 // DP CHANGE CODE
 
-hiddenImageInput = document.getElementById('hiddenDPInput')
+hiddenDPInput = document.getElementById('hiddenDPInput')
 dpChangeIcon = document.getElementById('dpChangeIcon')
 
 dpChangeIcon.addEventListener('click', function(){
-			hiddenImageInput.click()
+			hiddenDPInput.click()
 		})
 
 
@@ -24,3 +31,12 @@ dpRemoveIcon.addEventListener('click', function(){
 			fetch('dpRemove')
 			}
 })
+
+// IMAGE UPLOAD CODE
+imageUploadButton = document.getElementById('imageUploadButton')
+hiddenImageInput = document.getElementById('hiddenImageInput')
+imageUploadButton.addEventListener('click', function(){
+	hiddenImageInput.click()
+})
+
+

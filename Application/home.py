@@ -30,7 +30,8 @@ def home():
 	if 'uname' in session:
 		user = User.query.filter_by(UserName = session['uname']).first()
 		dob = user.DOB.strftime('%d %B %Y')
-		return render_template('home.html', userDetails = user, Birthday = dob)
+		dpPath = "profiles/{}/{}.jpg'".format(user.UserName, user.UserName)
+		return render_template('home.html', userDetails = user, Birthday = dob, DP = dpPath)
 	else:
 
 		return render_template('login.html')
@@ -75,6 +76,10 @@ def dpRemove():
 @homeBP.route("/imageShow")
 def imageShowWindow():
 	return render_template("imageShow.html")
+
+@homeBP.route("/cro")
+def dpSend():
+	return "Haha"
 
 
 @app.route("/logout")

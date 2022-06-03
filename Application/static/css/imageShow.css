@@ -68,12 +68,32 @@ p{
 	padding-right: 20px;
 }
 
+#likes {
+	/*background-color: red;*/
+	position: relative;
+}
+
+#likeIcon {
+	margin-left: 5px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+}
+
+#likeCount{
+	margin: 0px;
+	display: inline-block;
+	position: absolute;
+	top: 2.5px;
+	left: 27px;
+	font-size: 0.8em;
+
+}
 
 .line {
 	background-color: #3A3B3C;
 	height: 1px;
 	width: 94%;
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 	margin-top: 3px;
 }
 
@@ -84,6 +104,8 @@ p{
 #likeDiv{
 	color: #B5B7BC;
 	width: 30%;
+	padding-left: 0px;
+	position: relative;
 	border: none;
 	background-color: transparent;
 

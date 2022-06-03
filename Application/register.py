@@ -20,7 +20,7 @@ def register():
 		pwd2 = request.form['pwd2']
 		DP = request.files['file']
 		os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], uname))
-		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname, uname))
+		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname, uname+".jpg"))
 		checkUname = User.query.filter_by(UserName = uname).first()
 		print(checkUname)
 		if checkUname:
