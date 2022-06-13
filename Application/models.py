@@ -9,15 +9,18 @@ class User(db.Model):
 	UserName = db.Column(db.String(10))
 	DOB = db.Column(db.Date)
 	Password = db.Column(db.String(50))
+	socketId = db.Column(db.String(100))
 	images = db.relationship('Images', backref='User')
 	likedUsers = db.relationship('LikedUsers', backref='User')
+	
 
-	def __init__(self, fname, lname, uname, dob, pwd):
+	def __init__(self, fname, lname, uname, dob, pwd, sockID = None):
 		self.FirstName = fname
 		self.LastName = lname
 		self.UserName = uname
 		self.DOB = dob
 		self.Password = pwd
+		self.socketId = sockID
 
 class Images(db.Model):
 	__tablename__ = 'images'
@@ -27,10 +30,29 @@ class Images(db.Model):
 	likeCount = db.Column(db.Integer)
 	likedUsers = db.relationship('LikedUsers', backref='Images')
 
-	def __init__(self, user, path, likeCount):
+	def __init__(self, path, user = None, likeCount = 0):
 		self.User = user
 		self.path = path
 		self.likeCount = likeCount
+
+class Messages(db.Model):
+	__tablename__ = 'messages'
+	id = db.Column(db.Integer, primary_key=True)
+	toId = db.Column(db.Integer, db.ForeignKey('users.id'))
+	fromId = db.Column(db.Integer, db.ForeignKey('users.id'))
+	too = db.relationship('User',foreign_keys=[toId])
+	fromm = db.relationship('User', foreign_keys=[fromId])
+	time = db.Column(db.DateTime)
+	message = db.Column(db.String(1000))
+
+	def __init__(self, too, fromm, timee, msg):
+		self.toId = too
+		self.fromId = fromm
+		self.time = timee
+		self.message = msg
+	
+
+	
 
 class LikedUsers(db.Model):
 	__tablename__ = 'likedUsers'

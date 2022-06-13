@@ -1,10 +1,3 @@
-// var socket = io();
-
-// socket.on('connect', function() {
-// 	console.log(socket.id)
-// 	socket.emit('event', { data : 'I\'m Connected', id: socket.id });
-// })
-
 
 // DP DISPLAY CODE
 imgElement = document.getElementById('profilePicture')
@@ -29,6 +22,7 @@ dpRemoveIcon.addEventListener('click', function(){
 	if(respo == "YES")
 		{
 			fetch('dpRemove')
+			document.location.reload()	
 			}
 })
 

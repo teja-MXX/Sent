@@ -8,11 +8,6 @@
     src: url(../fonts/CONSOLA.TTF);
 }
 
-@font-face {
-  font-family: diehard;
-  src: url(../fonts/diehard.ttf);
-}
-
 input {
   margin-left: 5px;
   padding: 7px;
@@ -76,7 +71,7 @@ p:hover {
 /*CHAT WINDOW*/
 
 #chatWindow{
-  background-color: #F7F7F7;
+  /*background-color: red;*/
 
 
 }
@@ -92,85 +87,70 @@ p:hover {
   margin-bottom: 5px;
 }
 
-#chatArea {
-  height: 84vh;
-  /*background-color: #F7F7F7;*/
-  margin: 2vh 2vw;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  overflow-y: hidden;
+#chat {
+  height: 77.9vh;
 }
 
-#chatAreaIcon{
-  box-shadow: none;
+#msgArea {
+  width: 90%;
+  border: 1.2px solid;
+  margin-left: 1vw;
+  margin-top: 1.3vh;
+}
+
+button{
+  margin-top: 46%;
+  height: 31.5px;
+  width: 50px;
   position: absolute;
-  top: 35vh;
-  left: 54vw;
-  height: 90px;
-  width: 120px;
+  bottom: 23px;
+  left: 1190px;
 }
 
-#chatAreaHeading{
-  font-family: IBM;
+#fileUploadIcon {
   position: absolute;
-  top: 50vh;
-  left: 50.2vw;
+  top: 531px;
+  left: 1207px;
 }
 
-#msgInputDiv{
-  opacity: 0;
+#fileUploadIcon:hover{
+  color: black;
 }
 
-.inputUserName {
-  font-size: 1em;
-  font-family: diehard;
-  color: #6049DE;
-  padding-left: 11px;
+.msg{
+  padding: 5px;
+  margin-top: 7px;
+  margin-left: 10px;
+  margin-bottom: 7px;
+  font-weight: 200;
+  padding: 7px;
+  background-color: #EFEAE2;
+  width: fit-content;
+  border-radius: 6.5px;
 }
+
+
 
 .time{
-  font-size: 0.6em;
-  font-weight: 650;
-  padding-left: 5px;
-
+  font-size: 0.7em;
+  margin-left: 7px;
+  font-weight: normal;
+  float: right;
+  padding-top: 5px;
 }
 
-.receivedMsg{
-  background-color: #EFEAE2;
-  /*color: #757575;*/
+.right{
+  float: right;
+  margin-right: 10px;
+  background-color: #d9fdd3;
 }
 
-#msgInput {
-  display: inline-block;
-  width: 80%;
-  border: none;
-  outline: none;
-  font-size: 1em;
-  font-family: diehard;
+.right .chatUserId{
+  color: #9C88FF;
+  font-weight: 600;
 }
 
-#msgInput:active {
-  border: none;
-  outline: none;
+.chatUserId{
+  color: blue;
+  font-weight: 600;
 }
-
-
-
-
-.msgs{
-  border: none;
-  box-shadow: none;
-  padding: 6px 15px;
-  padding-left: 10px;
-  font-family: diehard;
-  font-size: 1em;
-  margin-bottom: 5px;
-  max-width: 60%;
-  border-radius: 5px;
-  background-color: #D9FDD3;
-  width: fit-content;
-}
-
-
-
-

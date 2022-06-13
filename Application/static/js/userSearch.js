@@ -1,3 +1,6 @@
+
+// USER SEARCH
+
 searchBox = document.getElementById('searchBox')
 searchBox.addEventListener("keypress", ale)
 searchValue = ""
@@ -36,9 +39,68 @@ function ale(e){
 						UserFullName.innerText = searchResultss.firstChild.innerText
 						searchBox.value = ""
 						chatListDiv.innerHTML = ""
+						msgInputDiv = document.getElementById('msgInputDiv')
+						msgInputDiv.style.opacity = 1
+						chatAreaIcon = document.getElementById('chatAreaIcon')
+						chatAreaIcon.remove()
+						chatAreaHeading = document.getElementById('chatAreaHeading')
+						chatAreaHeading.remove()
 					})
   				}
   			})
 	}
 }
 
+// SOCK INITIALIZATION
+var socket = io();
+socket.on('connect', function(){
+	console.log(socket.id)
+	socket.emit('socketidFromJsPython', {"sockID" : socket.id})
+})
+
+
+
+// CHAT SENT
+msgInput = document.getElementById('msgInput')
+msgInput.addEventListener('keydown', function(e){
+	
+	if(e.key == "Enter"){
+		from = document.getElementById('profile').firstElementChild.innerText
+		to = document.getElementById('UserFullName').innerText
+		data = {"from" : from, 
+				"to" : to, 
+				"msg" : this.value,
+				"sockId" : socket.id}
+		socket.emit('msgFromJsPython', data)
+		this.value = ""
+	}
+})
+
+
+socket.on('msgFromPythonJs', function(data){
+	chatAreaDiv = document.getElementById('chatArea')
+	p = document.createElement('p')
+	p.classList.toggle('msgs')
+	chatUserName = document.createElement('span')
+	chatUserName.classList.toggle('chatUserName')
+	if(data.sockId != socket.id){
+		p.classList.toggle('receivedMsg')
+		chatUserName.innerText = data['from'] + " :    " + data['msg']	
+	}
+	else{
+		chatUserName.innerText = "You" + " :    " + data['msg']
+	}
+
+	time = document.createElement('sub')
+	time.classList.toggle('time')
+	time.innerText = "     " + data['time']
+	p.appendChild(chatUserName)
+	p.appendChild(time)
+	
+	// msgInput.remove()
+	msgInputDiv = document.getElementById('msgInputDiv')
+	chatAreaDiv.insertBefore(p, msgInputDiv)
+	chatAreaDiv.scrollBy(0, chatAreaDiv.scrollHeight)
+
+
+})

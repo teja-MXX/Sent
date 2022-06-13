@@ -5,7 +5,7 @@ import os
 from PIL import Image
 from os.path import exists
 import random
-from Application.models import db, User
+from Application.models import db, User, Images
 import datetime
 
 homeBP = Blueprint('homeBP',__name__, 
@@ -43,8 +43,12 @@ def imageUPLOAD():
 		fileName = str(random.randint(1,1000000000)) + ".jpg"
 		while(exists(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))):
 			fileName = str(random.randint(1,1000000000)) + ".jpg"
-		
-		image.save(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))
+		imagePath = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName)
+		image.save(imagePath)
+		imageUser = User.query.filter_by(UserName = session['uname']).first()
+		imageUpload = Images(imagePath, imageUser, 0)
+		db.session.add(imageUpload)
+		db.session.commit()
 		return redirect("/")
 
 @homeBP.route("/dpChange", methods=["POST"])
@@ -76,11 +80,6 @@ def dpRemove():
 @homeBP.route("/imageShow")
 def imageShowWindow():
 	return render_template("imageShow.html")
-
-@homeBP.route("/cro")
-def dpSend():
-	return "Haha"
-
 
 @app.route("/logout")
 def logout():

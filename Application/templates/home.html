@@ -3,22 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+	<!-- <script type="text/javascript" src="{{url_for('static', filename='js/sock.js')}}"></script> -->
 	<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
-	<script type="text/javascript" src="{{url_for('static', filename='js/home.js')}}"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@400;500&display=swap');
-	</style>
-	<title>Home</title>
+	<title></title>
 </head>
 <body>
 	{% extends "base.html" %}
 	{% block sideBar %}
-		
 		<div id="line"></div>
 		<div id="profileInfo">
 			<div class="container">
-				<img id="profilePicture">
+				<img id="profilePicture" alt="404" onerror="this.src='{{url_for('static', filename='profiles/alien.png')}}';">
 				
 				{% if Identity %}
 
@@ -40,10 +36,6 @@
 			
 			<h4 id="Name">{{userDetails.FirstName + " " + userDetails.LastName}}</h4>	
 		</div>
-
-		
-		
-		
 	{% endblock %}
 
 	{% block chat %}
@@ -56,14 +48,9 @@
 				</form>
 			</h1> 
 		{% endif %}
-		
-		<!-- <img class="leftPadding userPhotos" src="{{url_for('static', filename='profiles/penny/penny.jpg')}}"> -->
 		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/sheldon/sheldon.jpg')}}">
-		<!-- <img class="userPhotos" src="{{url_for('static', filename='profiles/penny/penny.jpg')}}"> -->
-		
+			
 	{% endblock %}
 
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 </body>
 </html>
