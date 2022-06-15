@@ -40,11 +40,22 @@ def home():
 def imageUPLOAD():
 	if request.method == "POST":
 		image = request.files['imag']
-		fileName = str(random.randint(1,1000000000)) + ".jpg"
-		while(exists(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName))):
-			fileName = str(random.randint(1,1000000000)) + ".jpg"
+		totalImages = len(Images.query.all())
+		fileName = str(totalImages + 1) + ".jpg"
 		imagePath = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName)
 		image.save(imagePath)
+
+		i = Image.open(imagePath)
+		width, height = i.size
+		if(height > width or height == width):
+			perc = 550 / height
+		else:
+			perc = 900 / width
+
+		height = int(height * perc)
+		width = int(width * perc)
+		resizedImage = i.resize((width, height))
+		resizedImage.save(imagePath)
 		imageUser = User.query.filter_by(UserName = session['uname']).first()
 		imageUpload = Images(imagePath, imageUser, 0)
 		db.session.add(imageUpload)
@@ -77,9 +88,17 @@ def dpRemove():
 	os.remove(os.path.join(app.config['UPLOAD_FOLDER'], session['uname'],session['uname']+".jpg"))
 	return redirect("/")
 
-@homeBP.route("/imageShow")
-def imageShowWindow():
-	return render_template("imageShow.html")
+
+# FUNCTION FOR VIEWING YOUR OWN PROFILE PHOTOS IN NEW WINDOW
+@homeBP.route("/imageShow/<string:imageFileName>")
+def imageShowWindow(imageFileName):
+	print("Image File Name - "+imageFileName)
+	imageId = int(imageFileName.split(".")[0])
+	imgSrc = Images.query.filter_by(id = imageId).first().path.split("\\")
+	imgSrc = "/".join(imgSrc[7:])
+	return render_template("imageShow.html", path=imgSrc)
+	# return redirect("/dpRemove")
+
 
 @app.route("/logout")
 def logout():

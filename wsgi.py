@@ -1,5 +1,5 @@
 from Application import init_app
-from Application.models import db, User, Messages
+from Application.models import db, User
 from flask_socketio import SocketIO, emit
 from flask import session
 import datetime

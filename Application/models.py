@@ -35,25 +35,6 @@ class Images(db.Model):
 		self.path = path
 		self.likeCount = likeCount
 
-class Messages(db.Model):
-	__tablename__ = 'messages'
-	id = db.Column(db.Integer, primary_key=True)
-	toId = db.Column(db.Integer, db.ForeignKey('users.id'))
-	fromId = db.Column(db.Integer, db.ForeignKey('users.id'))
-	too = db.relationship('User',foreign_keys=[toId])
-	fromm = db.relationship('User', foreign_keys=[fromId])
-	time = db.Column(db.DateTime)
-	message = db.Column(db.String(1000))
-
-	def __init__(self, too, fromm, timee, msg):
-		self.toId = too
-		self.fromId = fromm
-		self.time = timee
-		self.message = msg
-	
-
-	
-
 class LikedUsers(db.Model):
 	__tablename__ = 'likedUsers'
 	id = db.Column(db.Integer, primary_key=True)

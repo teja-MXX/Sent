@@ -111,6 +111,7 @@ svg:hover {
 	word-wrap: break-word;
 	/*border: 1px solid;*/
 	box-shadow: 1px 1px 5px 3px #888888;
+
 }
 
 #icons {
@@ -181,4 +182,8 @@ svg:hover {
 	width: 250px;
 	height: 150px;
 	margin-bottom: 10px;
+}
+
+.left{
+	margin-left: 57.5px;
 }

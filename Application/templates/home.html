@@ -47,8 +47,17 @@
 					<input type="file" id="hiddenImageInput" name="imag" style="display:none" onchange="this.form.submit()">
 				</form>
 			</h1> 
+			
 		{% endif %}
-		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/sheldon/sheldon.jpg')}}">
+		<img class="userPhotos left" src="{{url_for('static', filename='profiles/raj/9.jpg')}}">
+		<img class="userPhotos" src="{{url_for('static', filename='profiles/raj/2.jpg')}}">
+		<img class="userPhotos" src="{{url_for('static', filename='profiles/raj/3.jpg')}}">
+		<img class="userPhotos left" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/4.jpg')}}">
+		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/5.jpg')}}">
+		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/4.jpg')}}">
+		<img class="userPhotos left" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/3.jpg')}}">
+		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/2.jpg')}}">
+		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/1.jpg')}}">
 			
 	{% endblock %}
 
