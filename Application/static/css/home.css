@@ -50,8 +50,8 @@ h1 {
 }
 
 img {
-	height: 150px;
-	width: 18vw;
+	max-height: 150px;
+	max-width: 235px;
 	margin-left: 3.18vh;
 	box-shadow: 1px 1px 5px 3px #888888;
 }
@@ -185,5 +185,5 @@ svg:hover {
 }
 
 .left{
-	margin-left: 57.5px;
+	margin-left: 80.5px;
 }

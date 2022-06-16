@@ -1,4 +1,11 @@
 16th June 2022
+	
+	1 . File Name for image Uploaded is according to its Image ID for better DB query . 
+	2 . Changed image ratio of the to fit the screen . 
 
-1 . File Name for image Uploaded is according to its Image ID for better DB query . 
-2 . Changed image ratio of the to fit the screen . 
+
+17th June 2022
+
+	1 . Added Black Padding for Display Profile Pictures when uploaded .
+ 
+

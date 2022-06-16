@@ -2,7 +2,7 @@ from flask import current_app as app, session, jsonify
 from flask import render_template, request, flash, redirect, flash
 from flask import Blueprint
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 from os.path import exists
 import random
 from Application.models import db, User, Images
@@ -71,15 +71,27 @@ def dpChange():
 		# Resizing in Image
 		i = Image.open(path)
 		width, height = i.size
-		if(height > width or height == width):
-			perc = 540 / height
+		if(height > 150):
+			perc = 150 / height
 		else:
-			perc = 850 / width
+			perc = 235 / width
 
 		height = int(height * perc)
 		width = int(width * perc)
 		resizedImage = i.resize((width, height))
-		resizedImage.save(path)
+		if(height <= 150):
+			# width padding	
+			# print("Line 84")
+			requiredPadding = int((235 - width) / 2)
+			paddedImage = ImageOps.expand(resizedImage, (requiredPadding, 0))
+
+		else:
+			# height padding
+			requiredPadding = int((150 - height) / 2)
+			paddedImage = ImageOps.expand(resizedImage, (0, requiredPadding))
+			# ADJUST HEIGHT ACCORDINGLY
+		
+		paddedImage.save(path)
 		return redirect("/")
 
 
