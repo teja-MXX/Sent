@@ -35,13 +35,11 @@ imageUploadButton.addEventListener('click', function(){
 
 
 // IMAGE VIEW CODE
-userPhotos = document.querySelectorAll('.userPhotos')
-for(let i=0 ; i<userPhotos.length; i++){
+userrPhotos = document.querySelectorAll('img')
+for(let i=0 ; i<userrPhotos.length; i++){
 	console.log(i)
-	var imageFileNameSplit = userPhotos[i].src.split("/").slice(-1)
+	var imageFileNameSplit = userrPhotos[i].src.split("/").slice(-1)
 	var locationn = "'/imageShow/" + imageFileNameSplit +"'"
-	userPhotos[i].setAttribute("onclick", `location.href=${locationn}`)
+	userrPhotos[i].setAttribute("onclick", `location.href=${locationn}`)
 }
-
-
 

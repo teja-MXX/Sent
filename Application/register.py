@@ -3,7 +3,8 @@ from werkzeug.utils import secure_filename
 import datetime
 import os
 from flask import current_app as app
-from Application.models import db,User
+from Application.models import db, User, Images
+from PIL import Image, ImageOps
 
 registerBP = Blueprint('registerBP', __name__)
 
@@ -20,7 +21,32 @@ def register():
 		pwd2 = request.form['pwd2']
 		DP = request.files['file']
 		os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], uname))
-		DP.save(os.path.join(app.config['UPLOAD_FOLDER'], uname, uname+".jpg"))
+		path = os.path.join(app.config['UPLOAD_FOLDER'], uname, uname+".jpg")
+		DP.save(path)
+		i = Image.open(path)
+		width, height = i.size
+		if(height > 150):
+			perc = 150 / height
+		else:
+			perc = 235 / width
+
+		height = int(height * perc)
+		width = int(width * perc)
+		resizedImage = i.resize((width, height))
+		# Adding Black Border padding . . .
+		if(height <= 150):
+			# width padding	
+			# print("Line 84")
+			requiredPadding = int((235 - width) / 2)
+			paddedImage = ImageOps.expand(resizedImage, (requiredPadding, 0))
+
+		else:
+			# height padding
+			requiredPadding = int((150 - height) / 2)
+			paddedImage = ImageOps.expand(resizedImage, (0, requiredPadding))
+			# ADJUST HEIGHT ACCORDINGLY
+		
+		paddedImage.save(path)
 		checkUname = User.query.filter_by(UserName = uname).first()
 		print(checkUname)
 		if checkUname:

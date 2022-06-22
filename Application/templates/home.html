@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-	<!-- <script type="text/javascript" src="{{url_for('static', filename='js/sock.js')}}"></script> -->
 	<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
 	<title></title>
 </head>
@@ -34,7 +33,8 @@
 				
 			</div>
 			
-			<h4 id="Name">{{userDetails.FirstName + " " + userDetails.LastName}}</h4>	
+			<h4 id="Name">{{userDetails.FirstName + " " + userDetails.LastName}}</h4>
+
 		</div>
 	{% endblock %}
 
@@ -47,19 +47,19 @@
 					<input type="file" id="hiddenImageInput" name="imag" style="display:none" onchange="this.form.submit()">
 				</form>
 			</h1> 
-			
 		{% endif %}
-		<img class="userPhotos left" src="{{url_for('static', filename='profiles/raj/9.jpg')}}">
-		<img class="userPhotos" src="{{url_for('static', filename='profiles/raj/2.jpg')}}">
-		<img class="userPhotos" src="{{url_for('static', filename='profiles/raj/3.jpg')}}">
-		<img class="userPhotos left" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/4.jpg')}}">
-		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/5.jpg')}}">
-		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/4.jpg')}}">
-		<img class="userPhotos left" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/3.jpg')}}">
-		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/2.jpg')}}">
-		<img class="userPhotos" onclick="location.href='/imageShow';" src="{{url_for('static', filename='profiles/raj/1.jpg')}}">
+		<div id="images">
+			{% if imagePaths %}
+				{% for path in imagePaths %}
+					<img class="userPhotos" src="{{ url_for('static', filename=path) }}">
+				{% endfor %}
+			{% endif %}	
+		</div>
+		
+		
 			
 	{% endblock %}
-
+		
+		
 </body>
 </html>

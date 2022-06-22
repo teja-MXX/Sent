@@ -7,5 +7,11 @@
 17th June 2022
 
 	1 . Added Black Padding for Display Profile Pictures when uploaded .
+
+22nd June 2022
+	1. Updating database structure to add table for users who have liked the photo
+	2. Added delete and edit button for uploaded photos . And functionality for deleting the photos . 
+	3. Displaying users list who have liked the picture , as they show it in the instagram . 
+	4. Navigating to users profile on clicking on their name on liked users list . 
  
 

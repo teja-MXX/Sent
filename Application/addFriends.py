@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request
-from Application.models import db, User
+from Application.models import db, User, Images
 
 friendsBP = Blueprint('friendsBP', __name__)
 
@@ -18,4 +18,18 @@ def friends():
 def profileVisit(uname):
 	user = User.query.filter_by(UserName = uname).first()
 	dob = user.DOB.strftime('%d %B %Y')
-	return render_template('home.html', userDetails = user, Birthday = dob, Identity = user.FirstName)
+	uploadedImages = Images.query.filter_by(user_id=user.id).all()
+	imagePaths = []
+	for images in uploadedImages:
+		staticPath = images.path.split("\\")[7:]
+		staticPath = "/".join(staticPath)
+		imagePaths.append(staticPath)
+	return render_template('home.html', userDetails = user, Birthday = dob, Identity = user.FirstName, imagePaths=imagePaths)
+
+@friendsBP.route("/imageShow/<string:imageFileName>")
+def imageShowWindow(uname, imageFileName):
+	print("Image File Name - "+imageFileName)
+	imageId = int(imageFileName.split(".")[0])
+	imgSrc = Images.query.filter_by(id = imageId).first().path.split("\\")
+	imgSrc = "/".join(imgSrc[7:])
+	return render_template("imageShow.html", path=imgSrc)
