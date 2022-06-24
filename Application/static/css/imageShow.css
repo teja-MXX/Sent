@@ -51,6 +51,7 @@ img {
 	right: 5px;
 	width: 330px;
 	background-color: #242526;
+	/*background-color: green;*/
 	box-shadow: 1px 1px 5px 3px #888888;
 	border: 1px solid;
 	margin-left: 20px;
@@ -91,7 +92,6 @@ p{
 }
 
 #likes {
-	/*background-color: red;*/
 	position: relative;
 }
 
@@ -112,6 +112,11 @@ p{
 }
 
 #likedUsers{
+	font-size: 0.8em;
+}
+
+#noLikes{
+	visibility: hidden;
 	font-size: 0.8em;
 }
 
@@ -172,6 +177,113 @@ p{
 
 #shareDiv:hover {
 	background-color: #3a3b3c;
+}
+
+#photoCommentsDiv{
+	overflow-y: scroll;
+	max-height: 57vh;
+	width: 90%;
+	padding-left: 10px;
+	margin-bottom: 5px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#photoCommentsDiv::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#photoCommentsDiv {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.photoComment{
+	width: 100%;
+}
+
+.reply{
+	margin-left: 30px;
+}
+
+.userCommentDP{
+	height: 40px;
+	width: 48.5px;
+	border-radius: 90%;
+	float: left;
+	margin-top: 12px;
+	margin-right: 7px;
+}
+
+.commentOptions{
+	display: flex;
+	flex-direction: column;
+}
+
+.comment{
+	margin-bottom: 0px;
+	font-size: 0.85em;
+	padding-right: 0px;
+}
+
+.uname{
+	cursor: pointer;
+}
+
+.likeReply{
+	display: flex;
+}
+
+.likeButton{
+	font-size: 0.7em;
+	margin-top: 5px;
+	color: #a5b1bc;
+	cursor: pointer;
+}
+
+.replyButton{
+	font-size: 0.7em;
+	color: #A5B1BC;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.commentReply{
+	font-size: 0.75em;
+	margin-top: 5px;
+	padding-left: 30px;
+}
+
+#commentInputDiv{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-right: 5px;
+	position: absolute;
+	visibility: hidden;
+	bottom: 5px;
+	right: 5px;
+}
+
+#commentInput{
+	padding: 5px;
+	border: 1px solid ;
+	height: 4vh;
+	color: white;
+	margin-top: 1vh;
+	width: 21.6vw;
+	background-color: transparent;
+	border-radius: 7.5px;
+}
+
+#deleteInputIcon{
+	margin-top: 2.1vh;
+	margin-left: 0.5vw;
+	/*color: #ea4335;*/
+}
+
+#deleteInputIcon:hover{
+	color: #ea4335;
 }
 
 #closeIcon {

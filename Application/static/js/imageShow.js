@@ -51,3 +51,40 @@ likedUser = document.querySelector('.fUser')
 var userName = likedUser.innerText
 var locationn = "'/profile/" + userName +"'"
 likedUser.setAttribute('onclick', `location.href=${locationn}`)
+
+// ENABLING INPUT COMMENT DIV
+commentDiv = document.querySelectorAll("#commentDiv , .replyButton")
+var j;
+for(j=0; j<commentDiv.length; j++){
+  commentDiv[j].addEventListener('click', function(){
+  photoCommentDiv = document.getElementById('photoCommentsDiv')
+  photoCommentDiv.style.height = '52vh'
+  commentInputDiv = document.getElementById('commentInputDiv')
+  commentInputDiv.style.visibility = 'visible' 
+})  
+}
+
+
+// SENDING COMMENT TO SERVER
+commentInput = document.getElementById('commentInput')
+uname = commentInput.placeholder.slice(17)
+commentInput.addEventListener('keypress', function(e){
+  if(e.key == "Enter"){
+      comment = uname + " : " + this.value
+      URL = document.URL.split("/")[4] + "/comment/" + comment
+      fetch(URL)
+      window.location.reload()
+      window.location.reload()
+      window.location.reload()
+      window.location.reload()
+      window.location.reload()
+  }
+})
+
+// DISABLING COMMENT INPUT DIV
+deleteInput = document.getElementById('deleteInputIcon')
+deleteInput.addEventListener('click', function(){
+  commentInputDiv = document.getElementById('commentInputDiv')
+  commentInputDiv.style.visibility = 'hidden'
+  window.location.reload()
+})

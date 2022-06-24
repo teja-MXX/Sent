@@ -45,6 +45,24 @@ class LikedUsers(db.Model):
 		self.user_id = user_id
 		self.image_id = image_id
 
+class Comments(db.Model):
+	__tablename__ = 'comments'
+	id = db.Column(db.Integer,primary_key=True)
+	comment = db.Column(db.String(1000))
+	commentedUser = db.Column(db.Integer)
+	commentTime = db.Column(db.DateTime)
+	parent_Id = db.Column(db.Integer)
+	image_Id = db.Column(db.Integer)
+
+	def __init__(self, comment, commentedUser, 	commentTime, parentId, imageId):
+		self.comment = comment
+		self.commentedUser = commentedUser
+		self.commentTime = commentTime
+		self.parent_Id = parentId
+		self.image_Id = imageId
+
+
+
 
 
 

@@ -13,9 +13,11 @@ def init_app():
 		from .chat import chatBP
 		from .register import registerBP
 		from .addFriends import friendsBP
+		from .imageShow import imageShowBP
 		app.register_blueprint(chatBP)
 		app.register_blueprint(homeBP)
 		app.register_blueprint(registerBP)
 		app.register_blueprint(friendsBP)
+		app.register_blueprint(imageShowBP)
 		db.create_all()
 		return app

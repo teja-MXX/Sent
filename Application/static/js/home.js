@@ -35,7 +35,7 @@ imageUploadButton.addEventListener('click', function(){
 
 
 // IMAGE VIEW CODE
-userrPhotos = document.querySelectorAll('img')
+userrPhotos = document.querySelectorAll('.userPhotos')
 for(let i=0 ; i<userrPhotos.length; i++){
 	console.log(i)
 	var imageFileNameSplit = userrPhotos[i].src.split("/").slice(-1)

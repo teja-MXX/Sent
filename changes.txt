@@ -13,5 +13,11 @@
 	2. Added delete and edit button for uploaded photos . And functionality for deleting the photos . 
 	3. Displaying users list who have liked the picture , as they show it in the instagram . 
 	4. Navigating to users profile on clicking on their name on liked users list . 
+	5. Added comments table and comments feature in ImageShow path . 
+
+23rd June 2022
+	1. Added Comments table .
+	2. Displaying comments .
+
  
 

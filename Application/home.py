@@ -5,7 +5,7 @@ import os
 from PIL import Image, ImageOps
 from os.path import exists
 import random
-from Application.models import db, User, Images, LikedUsers
+from Application.models import db, User, Images, LikedUsers, Comments
 import datetime
 
 homeBP = Blueprint('homeBP',__name__, 
@@ -114,10 +114,33 @@ def imageShowWindow(imageFileName):
 			if userFind.UserName == session['uname']:
 				likedPhoto = True
 				break
-			
+	# GETTING COMMENTS
+	commentDetails = []
+	allComments = Comments.query.filter_by(image_Id = imageId, parent_Id=None).all()
+	if allComments:
+		for comment in allComments:
+			tmp = {}
+			tmp['comment'] = comment.comment
+			commentedUserDetails = User.query.filter_by(id = comment.commentedUser).first()
+			tmp['commentedUser'] = commentedUserDetails.UserName
+			tmp['commentedUserDP'] = 'profiles/{}/{}.jpg'.format(tmp['commentedUser'], tmp['commentedUser'])
+			tmp['commentID'] = comment.id
+			tmp['commentReplies'] = []
+			allCommentReplies = Comments.query.filter_by(parent_Id = comment.id).all()
+			for reply in allCommentReplies:
+				tmp2 = {}
+				tmp2['comment'] = reply.comment
+				tmp2['replyID'] = reply.id
+				replyUserDetails = User.query.filter_by(id = reply.commentedUser).first()
+				tmp2['replyUser'] = replyUserDetails.UserName
+				tmp2['replyUserDP'] = 'profiles/{}/{}.jpg'.format(tmp2['replyUser'], tmp2['replyUser'])
+				tmp['commentReplies'].append(tmp2)
+			commentDetails.append(tmp)
+		print(commentDetails)
+
 	if userDetails:
-		return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, details=userDetails[0], likedPhoto=likedPhoto)
-	return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, likedPhoto=likedPhoto)
+		return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, uname=session['uname'], details=userDetails[0], likedPhoto=likedPhoto, comments=commentDetails)
+	return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, uname=session['uname'], likedPhoto=likedPhoto, comments=commentDetails)
 	
 
 # IMAGE EDIT
@@ -141,6 +164,8 @@ def deletePhoto(imageFileName):
 	imageQuery = Images.query.filter_by(id = imageId).first()
 	imagePath = imageQuery.path
 	users = LikedUsers.query.filter_by(image_id = imageId).delete()
+	commentQuery = Comments.query.filter_by(image_Id = imageId).all()
+	db.session.delete(commentQuery)
 	db.session.delete(imageQuery)
 	db.session.commit()
 	os.remove(imagePath)
@@ -165,12 +190,18 @@ def updateLikes(imageFileName):
 
 
 
+
+
 @app.route("/logout")
 def logout():
 	session.pop('uname', None)
 	session.pop('_flashes', None)
 	return redirect('/')
 
+
+
+
+# ADDING BLACK PADDING TO PHOTO BY RESIZING
 def addPadding(path, imageType):
 	i = Image.open(path)
 	width, height = i.size
