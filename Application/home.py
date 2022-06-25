@@ -14,12 +14,13 @@ homeBP = Blueprint('homeBP',__name__,
 @homeBP.route("/", defaults={'pageNo':1}, methods=['GET', 'POST'])
 @homeBP.route("/<int:pageNo>")
 def home(pageNo):
-	print(pageNo)
 	if request.method == "POST":
 		uname = request.form['username']
 		pwd = request.form['password']
-		user = User.query.filter_by(UserName = uname).first()
-
+		try:
+			user = User.query.filter_by(UserName = uname).first()
+		except:
+			return redirect("/404")
 		if user:
 			if pwd != user.Password:
 				flash('Wrong Password')
@@ -33,9 +34,8 @@ def home(pageNo):
 					staticPath = "/".join(staticPath)
 					imagePaths.append(staticPath)
 				
-				return render_template('home.html', userDetails = user, Birthday = dob, imagePaths=imagePaths, imageIds = '5')
+				return redirect("/")
 		else:
-			print('Hahaha')
 			flash('Username doesn\'t Exists')
 	if 'uname' in session:
 		user = User.query.filter_by(UserName = session['uname']).first()
@@ -64,8 +64,6 @@ def home(pageNo):
 			totalPages = pages
 		if(pageNo == totalPages):
 			lastPage = True
-		print("Last Page ")
-		print(lastPage)
 		return render_template('home.html', userDetails = user, Birthday = dob, DP = dpPath, imagePaths = imagePaths, pages=totalPages, lastPage=lastPage)
 	else:
 
@@ -73,24 +71,25 @@ def home(pageNo):
 
 @homeBP.route("/pageChange/<int:page>")
 def pageChange(page):
-	print("Line 74")
 	return redirect("/"+str(page))
 
 @homeBP.route("/imageUpload", methods=["GET", "POST"])
 def imageUPLOAD():
 	if request.method == "POST":
 		image = request.files['imag']
-		f = open(os.path.join(app.config['UPLOAD_FOLDER'], 'dbInfo.txt'))
-		lastImageId = int(f.read())
-		f.close()
-		fileName = str(lastImageId + 1) + ".jpg"
+		# fileName = str(lastImageId + 1) + ".jpg"
+		fileName = "haha.jpg"
+		imagePath = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName)
+		imageUser = User.query.filter_by(UserName = session['uname']).first()
+		imageUpload = Images(imagePath, imageUser, 0)
+		db.session.add(imageUpload)
+		db.session.flush()
+		print("Line 97 "+str(imageUpload.id))
+		db.session.remove()
+		fileName = str(imageUpload.id)+".jpg"
 		imagePath = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName)
 		image.save(imagePath)
-		f = open(os.path.join(app.config['UPLOAD_FOLDER'], 'dbInfo.txt'),'w')
-		f.write(str(lastImageId + 1))
-		f.close()
 		addPadding(imagePath, "GALLERY")
-		imageUser = User.query.filter_by(UserName = session['uname']).first()
 		imageUpload = Images(imagePath, imageUser, 0)
 		db.session.add(imageUpload)
 		db.session.commit()
@@ -181,8 +180,6 @@ def editPhoto(imageFileName):
 	imgSrc = "/".join(imgSrc[7:])
 	return render_template("imageShowEdit.html", path=imgSrc, user=imageUser)
 
-
-
 # DELETING USER PHOTOS WHEN OPENED IN NEW WINDOW
 @homeBP.route("/imageShow/<string:imageFileName>/delete")
 def deletePhoto(imageFileName):
@@ -215,18 +212,15 @@ def updateLikes(imageFileName):
 		db.session.commit()
 	return redirect("/imageShow/" + imageFileName)
 
-
-
-
+@app.route("/404")
+def error404():
+	return render_template('404.html')
 
 @app.route("/logout")
 def logout():
 	session.pop('uname', None)
 	session.pop('_flashes', None)
 	return redirect('/')
-
-
-
 
 # ADDING BLACK PADDING TO PHOTO BY RESIZING
 def addPadding(path, imageType):

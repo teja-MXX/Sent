@@ -35,6 +35,12 @@ deleteButton.addEventListener('click', function(){
   window.location.href='/'
 })
 
+// CLOSE ICON
+closeIcon = document.getElementById('closeIcon')
+closeIcon.addEventListener('click', function(){
+  imageURL = document.URL
+})
+
 // LIKES UPDATED
 likeButton = document.getElementById('likeDiv')
 likeButton.addEventListener('click', function(){
