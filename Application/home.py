@@ -11,8 +11,10 @@ import datetime
 homeBP = Blueprint('homeBP',__name__, 
 			template_folder='templates', static_folder='static')
 
-@homeBP.route("/", methods=['GET', 'POST'])
-def home():
+@homeBP.route("/", defaults={'pageNo':1}, methods=['GET', 'POST'])
+@homeBP.route("/<int:pageNo>")
+def home(pageNo):
+	print(pageNo)
 	if request.method == "POST":
 		uname = request.form['username']
 		pwd = request.form['password']
@@ -41,15 +43,38 @@ def home():
 		dpPath = "profiles/{}/{}.jpg'".format(user.UserName, user.UserName)
 		uploadedImages = Images.query.filter_by(user_id=user.id).all()
 		imagePaths = []
+		imageStartIndex = (pageNo - 1) * 9
+		count = 0
 		for images in uploadedImages:
-			staticPath = images.path.split("\\")[7:]
-			staticPath = "/".join(staticPath)
-			imagePaths.append(staticPath)
-
-		return render_template('home.html', userDetails = user, Birthday = dob, DP = dpPath, imagePaths = imagePaths)
+			if(count >= imageStartIndex and count < imageStartIndex+9):
+				staticPath = images.path.split("\\")[7:]
+				staticPath = "/".join(staticPath)
+				imagePaths.append(staticPath)
+				count +=1
+			else:
+				count +=1
+				pass
+		
+		# DISABLING THE LAST NEXT PAGE BUTTON in Home Screen
+		pages = int(len(uploadedImages) / 9)
+		lastPage = False
+		if (len(uploadedImages) % 9 != 0):
+			totalPages = pages + 1
+		else:
+			totalPages = pages
+		if(pageNo == totalPages):
+			lastPage = True
+		print("Last Page ")
+		print(lastPage)
+		return render_template('home.html', userDetails = user, Birthday = dob, DP = dpPath, imagePaths = imagePaths, pages=totalPages, lastPage=lastPage)
 	else:
 
 		return render_template('login.html')
+
+@homeBP.route("/pageChange/<int:page>")
+def pageChange(page):
+	print("Line 74")
+	return redirect("/"+str(page))
 
 @homeBP.route("/imageUpload", methods=["GET", "POST"])
 def imageUPLOAD():
@@ -129,7 +154,8 @@ def imageShowWindow(imageFileName):
 			allCommentReplies = Comments.query.filter_by(parent_Id = comment.id).all()
 			for reply in allCommentReplies:
 				tmp2 = {}
-				tmp2['comment'] = reply.comment
+				tmp2['@comment'] = "".join(reply.comment.split(" ")[0])
+				tmp2['comment'] = " ".join(reply.comment.split(" ")[1:])
 				tmp2['replyID'] = reply.id
 				replyUserDetails = User.query.filter_by(id = reply.commentedUser).first()
 				tmp2['replyUser'] = replyUserDetails.UserName
@@ -160,6 +186,7 @@ def editPhoto(imageFileName):
 # DELETING USER PHOTOS WHEN OPENED IN NEW WINDOW
 @homeBP.route("/imageShow/<string:imageFileName>/delete")
 def deletePhoto(imageFileName):
+	print("Haha")
 	imageId = int(imageFileName.split(".")[0])
 	imageQuery = Images.query.filter_by(id = imageId).first()
 	imagePath = imageQuery.path

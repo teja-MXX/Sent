@@ -55,11 +55,15 @@
 				{% endfor %}
 			{% endif %}	
 		</div>
-		
-		
-			
+		<div id="nextPageButtonsDiv">
+			<!-- <button id="leftPage" disabled><</button> -->
+			<button id="leftPage"><</button>
+			{% if lastPage %}
+				<button id="rightPage" disabled>></button>
+			{% else %}
+				<button id="rightPage">></button>
+			{% endif %}
+		</div>
 	{% endblock %}
-		
-		
 </body>
 </html>

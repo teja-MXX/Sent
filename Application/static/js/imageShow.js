@@ -64,20 +64,56 @@ for(j=0; j<commentDiv.length; j++){
 })  
 }
 
+// ADDING Comment PLACEHOLDER TO commentInput when clicked on Comment Button
+commentButton = document.getElementById('commentDiv')
+commentButton.addEventListener('click', function(){
+  if(commentInput.placeholder[0] == "R"){
+    commentInput.placeholder = "Comment " + commentInput.placeholder.slice(6)
+  }
+  else if(commentInput.placeholder[0] != "C"){
+    commentInput.placeholder = "Comment as " + commentInput.placeholder
+  }
+})
 
-// SENDING COMMENT TO SERVER
+// ADDING REPLY PLACEHOLDER TO commentInput when clicked on Reply Button
+replyButton = document.querySelectorAll('.replyButton')
+var r;
+for(r=0; r<replyButton.length; r++){
+  replyButton[r].addEventListener('click', function(){
+    commentId = this.parentElement.previousElementSibling.id
+    URL = document.URL.split("/")[4] + "/reply/" + commentId +"/"
+    commentInput = document.getElementById('commentInput')
+    if(commentInput.placeholder[0] == "C"){
+      commentInput.placeholder = "Reply " + commentInput.placeholder.slice(8)  
+    }   
+    else if(commentInput.placeholder[0] != "R"){
+      commentInput.placeholder = "Reply as " + commentInput.placeholder
+    }
+  })
+}
+
+// SENDING COMMENT/REPLY TO SERVER
 commentInput = document.getElementById('commentInput')
-uname = commentInput.placeholder.slice(17)
 commentInput.addEventListener('keypress', function(e){
   if(e.key == "Enter"){
-      comment = uname + " : " + this.value
-      URL = document.URL.split("/")[4] + "/comment/" + comment
-      fetch(URL)
-      window.location.reload()
-      window.location.reload()
-      window.location.reload()
-      window.location.reload()
-      window.location.reload()
+    
+    if(commentInput.placeholder[0] == "R"){
+      uname = commentInput.placeholder.slice(9)
+      
+    }
+    else{
+      uname = commentInput.placeholder.slice(11)
+      URL = document.URL.split("/")[4] + "/comment/"
+    }
+
+    comment = uname + " : " + this.value
+    URL = URL + comment
+    fetch(URL)
+    window.location.reload()
+    window.location.reload()
+    window.location.reload()
+    window.location.reload()
+    window.location.reload()
   }
 })
 

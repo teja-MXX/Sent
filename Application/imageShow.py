@@ -9,7 +9,6 @@ imageShowBP = Blueprint('imageShowBP',__name__,
 @imageShowBP.route("/imageShow/<string:imageFileName>/comment/<string:userComment>")
 def comment(imageFileName, userComment):
 	commentedUser, comment = userComment.split(" : ")
-	print(commentedUser, comment)
 	commentUserId = User.query.filter_by(UserName = commentedUser).first().id
 	commentTime = datetime.now()
 	parent_Id = None
@@ -21,3 +20,29 @@ def comment(imageFileName, userComment):
 	db.session.commit()
 	print("Haha")
 	return imageShowWindow(imageFileName)
+
+@imageShowBP.route("/imageShow/<string:imageFileName>/reply/<int:parentCommentId>/<string:userComment>")
+def reply(imageFileName, parentCommentId, userComment):
+	print("Mannnnnn")
+	commentQuery = Comments.query.filter_by(id = parentCommentId).first()
+	if commentQuery.parent_Id:
+		parent_Id = commentQuery.parent_Id
+	else:
+		parent_Id = parentCommentId
+	commentedUser, comment = userComment.split(" : ")
+	replyTo = commentQuery.commentedUser
+	replyTo = User.query.filter_by(id = replyTo).first().UserName
+	replyTo = "@"+replyTo+" "
+	comment = replyTo + comment
+	print("Line 37")
+	commentUserId = User.query.filter_by(UserName = commentedUser).first().id
+	commentTime = datetime.now()
+	imageId = int(imageFileName.split(".")[0])
+	print("ImageID - "+str(imageId))
+	
+	commentInsert = Comments(comment, commentUserId, commentTime, parent_Id, imageId)
+	db.session.add(commentInsert)
+	db.session.commit()
+	print("Haha")
+	return imageShowWindow(imageFileName)
+

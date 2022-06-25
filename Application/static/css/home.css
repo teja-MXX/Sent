@@ -197,3 +197,23 @@ svg:hover {
 #images{
 	padding-left: 65.5px;
 }
+
+#nextPageButtonsDiv{
+	display: flex;
+	position: absolute;
+	right: 25px;
+	bottom: 20.5px;
+}
+
+#nextPageButtonsDiv button{
+	font-size: 0.9em;
+	/*padding: 0px;*/
+	height: 100%;
+}
+
+#nextPageButtonsDiv p{
+	margin-top: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+

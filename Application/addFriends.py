@@ -24,12 +24,5 @@ def profileVisit(uname):
 		staticPath = images.path.split("\\")[7:]
 		staticPath = "/".join(staticPath)
 		imagePaths.append(staticPath)
+		print("Cool 27")
 	return render_template('home.html', userDetails = user, Birthday = dob, Identity = user.FirstName, imagePaths=imagePaths)
-
-@friendsBP.route("/imageShow/<string:imageFileName>")
-def imageShowWindow(uname, imageFileName):
-	print("Image File Name - "+imageFileName)
-	imageId = int(imageFileName.split(".")[0])
-	imgSrc = Images.query.filter_by(id = imageId).first().path.split("\\")
-	imgSrc = "/".join(imgSrc[7:])
-	return render_template("imageShow.html", path=imgSrc)

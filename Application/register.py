@@ -21,32 +21,33 @@ def register():
 		pwd2 = request.form['pwd2']
 		DP = request.files['file']
 		os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], uname))
-		path = os.path.join(app.config['UPLOAD_FOLDER'], uname, uname+".jpg")
-		DP.save(path)
-		i = Image.open(path)
-		width, height = i.size
-		if(height > 150):
-			perc = 150 / height
-		else:
-			perc = 235 / width
+		if DP:
+			
+			path = os.path.join(app.config['UPLOAD_FOLDER'], uname, uname+".jpg")
+			DP.save(path)
+			i = Image.open(path)
+			width, height = i.size
+			if(height > 150):
+				perc = 150 / height
+			else:
+				perc = 235 / width
 
-		height = int(height * perc)
-		width = int(width * perc)
-		resizedImage = i.resize((width, height))
-		# Adding Black Border padding . . .
-		if(height <= 150):
-			# width padding	
-			# print("Line 84")
-			requiredPadding = int((235 - width) / 2)
-			paddedImage = ImageOps.expand(resizedImage, (requiredPadding, 0))
-
-		else:
-			# height padding
-			requiredPadding = int((150 - height) / 2)
-			paddedImage = ImageOps.expand(resizedImage, (0, requiredPadding))
-			# ADJUST HEIGHT ACCORDINGLY
+			height = int(height * perc)
+			width = int(width * perc)
+			resizedImage = i.resize((width, height))
+			# Adding Black Border padding . . .
+			if(height <= 150):
+				# width padding	
+				# print("Line 84")
+				requiredPadding = int((235 - width) / 2)
+				paddedImage = ImageOps.expand(resizedImage, (requiredPadding, 0))
+			else:
+				# height padding
+				requiredPadding = int((150 - height) / 2)
+				paddedImage = ImageOps.expand(resizedImage, (0, requiredPadding))
+				# ADJUST HEIGHT ACCORDINGLY
 		
-		paddedImage.save(path)
+			paddedImage.save(path)
 		checkUname = User.query.filter_by(UserName = uname).first()
 		print(checkUname)
 		if checkUname:
