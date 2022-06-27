@@ -252,9 +252,7 @@ p{
 }
 
 .commentReply{
-	font-size: 0.75em;
-	margin-top: 5px;
-	padding-left: 30px;
+	color: #1877F2;
 }
 
 #commentInputDiv{

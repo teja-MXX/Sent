@@ -1,3 +1,10 @@
+//IMAGE VIEW CODE
+userrPhotos = document.querySelectorAll('#images .userPhotos')
+for(let i=0 ; i<userrPhotos.length; i++){
+	var imageFileNameSplit = userrPhotos[i].src.split("/").slice(-1)
+	var locationn = "'/imageShow/" + imageFileNameSplit +"'"
+	userrPhotos[i].setAttribute("onclick", `location.href=${locationn}`)
+}
 
 // DP DISPLAY CODE
 imgElement = document.getElementById('profilePicture')
@@ -58,12 +65,12 @@ leftPageButton.addEventListener('click', function(){
 	
 })
 
-//IMAGE VIEW CODE
-userrPhotos = document.querySelectorAll('.userPhotos')
-for(let i=0 ; i<userrPhotos.length; i++){
-	var imageFileNameSplit = userrPhotos[i].src.split("/").slice(-1)
-	var locationn = "'/imageShow/" + imageFileNameSplit +"'"
-	userrPhotos[i].setAttribute("onclick", `location.href=${locationn}`)
+// ENABLING PREV PAGE BUTTON for multiple pages
+uRl = document.URL.split("/")[3]
+if(uRl != ''){
+	leftPageButton = document.getElementById('leftPage')
+	leftPageButton.disabled = false
 }
+
 
 

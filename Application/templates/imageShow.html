@@ -66,27 +66,6 @@
 			</div>			
 			<div class="line"></div>
 			<div id="photoCommentsDiv">
-
-				<!-- <div class="photoComment">
-					<img class="userCommentDP" src="{{url_for('static',filename='profiles/snoop/snoop.jpg')}}">
-					<div class="commentOptions">
-						<p class="comment"> Lorem Ipsum dude something else to do . But I dont understand Lorem Ipsum dude something else to do . But I dont understand Lorem Ipsum dude something else to do . But I dont understand.</p>	
-						<div class="likeReply">
-							<p class="replyButton">Reply</p>
-							<p class="likeButton">Like</p>	
-						</div>
-					</div>
-				</div>
-				<div class="photoComment reply">
-					<img class="userCommentDP" src="{{url_for('static',filename='profiles/snoop/snoop.jpg')}}">
-					<div class="commentOptions">
-						<p class="comment"> Lorem Ipsum dude something else to do . But I dont understand Lorem Ipsum dude something else to do . But I dont understand Lorem Ipsum dude something else to do . But I dont understand.</p>	
-						<div class="likeReply">
-							<p class="replyButton">Reply</p>
-							<p class="likeButton">Like</p>	
-						</div>
-					</div>	
-				</div> -->
 				{% if comments %}
 					{% for comment in comments %}
 						<div class="photoComment">
@@ -104,7 +83,7 @@
 								<div class="photoComment reply">
 									<img class="userCommentDP" src="{{url_for('static',filename='profiles/snoop/snoop.jpg')}}">
 									<div class="commentOptions">
-										<p id="{{reply.replyID}}" class="comment"><b class="uname" onclick="location.href='/profile/{{reply.replyUser}}'">{{reply.replyUser}} </b> <b class="uname" onclick="location.href='/profile/{{reply['replyUser']}}'">{{reply['@comment']}} </b>	{{reply.comment}}</p>	
+										<p id="{{reply.replyID}}" class="comment"><b class="uname" onclick="location.href='/profile/{{reply.replyUser}}'">{{reply.replyUser}} </b> <b class="uname commentReply" onclick="location.href='/profile/{{comment['commentedUser']}}'">{{reply['@comment']}} </b>	{{reply.comment}}</p>	
 										<div class="likeReply">
 											<p class="replyButton">Reply</p>
 											<p class="likeButton">Like</p>	
