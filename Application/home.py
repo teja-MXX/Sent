@@ -84,7 +84,6 @@ def imageUPLOAD():
 		imageUpload = Images(imagePath, imageUser, 0)
 		db.session.add(imageUpload)
 		db.session.flush()
-		print("Line 97 "+str(imageUpload.id))
 		db.session.remove()
 		fileName = str(imageUpload.id)+".jpg"
 		imagePath = os.path.join(app.config['UPLOAD_FOLDER'], session['uname'], fileName)
@@ -131,13 +130,16 @@ def imageShowWindow(imageFileName):
 	# CHECKING IF USER HAS LIKED SO THAT LIKE BUTTON IS FILLED
 	likedPhoto = False
 	userDetails = []
+	photoLikesUsers = []
 	if allLikedUsers:
 		for likedUser in allLikedUsers:
 			userFind = User.query.filter_by(id = likedUser.user_id).first()
+			print(userFind.UserName)
+			photoLikesUsers.append((userFind.FirstName+" "+userFind.LastName, "profiles/"+userFind.UserName+"/"+userFind.UserName+".jpg", userFind.UserName))
 			userDetails.append(userFind.UserName)
 			if userFind.UserName == session['uname']:
 				likedPhoto = True
-				break
+				
 	# GETTING COMMENTS
 	commentDetails = []
 	allComments = Comments.query.filter_by(image_Id = imageId, parent_Id=None).all()
@@ -161,17 +163,15 @@ def imageShowWindow(imageFileName):
 				tmp2['replyUserDP'] = 'profiles/{}/{}.jpg'.format(tmp2['replyUser'], tmp2['replyUser'])
 				tmp['commentReplies'].append(tmp2)
 			commentDetails.append(tmp)
-		print(commentDetails)
 
 	if userDetails:
-		return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, uname=session['uname'], details=userDetails[0], likedPhoto=likedPhoto, comments=commentDetails)
+		return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, uname=session['uname'], details=userDetails[0], likedPhoto=likedPhoto, comments=commentDetails, photoLikesUsers=photoLikesUsers)
 	return render_template("imageShow.html", path=imgSrc, user=imageUser, likes=imgLikes, uname=session['uname'], likedPhoto=likedPhoto, comments=commentDetails)
 	
 
 # IMAGE EDIT
 @homeBP.route("/imageShow/<string:imageFileName>/edit")
 def editPhoto(imageFileName):
-	print("Cool")
 	imageId = int(imageFileName.split(".")[0])
 	imageQuery = Images.query.filter_by(id = imageId).first()
 	imageUserQuery = User.query.filter_by(id = imageQuery.user_id).first()
@@ -183,7 +183,6 @@ def editPhoto(imageFileName):
 # DELETING USER PHOTOS WHEN OPENED IN NEW WINDOW
 @homeBP.route("/imageShow/<string:imageFileName>/delete")
 def deletePhoto(imageFileName):
-	print("Haha")
 	imageId = int(imageFileName.split(".")[0])
 	imageQuery = Images.query.filter_by(id = imageId).first()
 	imagePath = imageQuery.path
@@ -204,7 +203,6 @@ def updateLikes(imageFileName):
 	PhotoLiked = LikedUsers.query.filter_by(user_id = user.id , image_id = imageQuery.id).first()
 	if(not PhotoLiked):
 		imageQuery.likeCount += 1
-		print(session['uname'])
 		
 		likedUser = LikedUsers(user.id, imageQuery.id)
 		db.session.add(likedUser)

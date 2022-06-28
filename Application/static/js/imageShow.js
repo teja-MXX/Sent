@@ -21,8 +21,18 @@ window.onclick = function(event) {
 // EDIT BUTTON
 editButton = document.getElementById('editImage')
 editButton.addEventListener('click', function(){
-  
 })
+
+// COMMENT LIKES UDPATE
+commentLikeButton = document.querySelectorAll('.likeButton')
+var c=0;
+for(c=0; c<commentLikeButton.length; c++){
+  commentLikeButton[c].addEventListener('click', function(){
+  commentId = this.parentElement.previousElementSibling.id
+  imageId = document.URL.split("/")[4]
+  fetch(`/commentLike/${imageId}/${commentId}`)
+})
+}
 
 // DELETE PHOTO
 deleteButton = document.getElementById('deleteButton')
@@ -41,6 +51,18 @@ closeIcon.addEventListener('click', function(){
   imageURL = document.URL
 })
 
+closeIconLikes = document.getElementById('closeIconLikes')
+closeIconLikes.addEventListener('click', function(){
+  likesListDiv = document.getElementById('likesListDiv')
+  likesListDiv.style.display = 'none'  
+  likeCommentDiv = document.getElementById('likeCommentDiv')
+  likeCommentDiv.style.opacity = '100%'
+
+})
+
+
+
+
 // LIKES UPDATED
 likeButton = document.getElementById('likeDiv')
 likeButton.addEventListener('click', function(){
@@ -51,6 +73,14 @@ likeButton.addEventListener('click', function(){
   window.location.reload()
 })
 
+// GETTING LIST OF LIKED USERS
+oUsers = document.querySelector('.oUser')
+oUsers.addEventListener('click', function(){
+  likesListDiv = document.getElementById('likesListDiv')
+  likesListDiv.style.display='block'
+  likeCommentDiv = document.getElementById('likeCommentDiv')
+  likeCommentDiv.style.opacity = '30%'
+})
 
 // GOING TO PROFILE OF THE USERS WHO LIKED THE PHOTO
 likedUser = document.querySelector('.fUser')

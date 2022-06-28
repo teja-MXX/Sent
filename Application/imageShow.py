@@ -1,5 +1,5 @@
-from flask import Blueprint, redirect
-from Application.models import db, User, Images, Comments
+from flask import Blueprint, redirect, session
+from Application.models import db, User, Images, Comments, CommentLike
 from datetime import datetime
 from .home import imageShowWindow
 
@@ -13,17 +13,14 @@ def comment(imageFileName, userComment):
 	commentTime = datetime.now()
 	parent_Id = None
 	imageId = int(imageFileName.split(".")[0])
-	print("ImageID - "+str(imageId))
 	
 	commentInsert = Comments(comment, commentUserId, commentTime, parent_Id, imageId)
 	db.session.add(commentInsert)
 	db.session.commit()
-	print("Haha")
 	return imageShowWindow(imageFileName)
 
 @imageShowBP.route("/imageShow/<string:imageFileName>/reply/<int:parentCommentId>/<string:userComment>")
 def reply(imageFileName, parentCommentId, userComment):
-	print("Mannnnnn")
 	commentQuery = Comments.query.filter_by(id = parentCommentId).first()
 	if commentQuery.parent_Id:
 		parent_Id = commentQuery.parent_Id
@@ -34,15 +31,27 @@ def reply(imageFileName, parentCommentId, userComment):
 	replyTo = User.query.filter_by(id = replyTo).first().UserName
 	replyTo = "@"+replyTo+" "
 	comment = replyTo + comment
-	print("Line 37")
 	commentUserId = User.query.filter_by(UserName = commentedUser).first().id
 	commentTime = datetime.now()
 	imageId = int(imageFileName.split(".")[0])
-	print("ImageID - "+str(imageId))
 	
 	commentInsert = Comments(comment, commentUserId, commentTime, parent_Id, imageId)
 	db.session.add(commentInsert)
 	db.session.commit()
-	print("Haha")
 	return imageShowWindow(imageFileName)
+
+@imageShowBP.route("/commentLike/<string:imageId>/<string:commentId>")
+def commentLikeUpdate(imageId, commentId):
+	# CHECKING IF USER ALREADY LIKED
+	likedUserId = User.query.filter_by(UserName = session['uname']).first().id
+	commentId = int(commentId)
+	foundUser = CommentLike.query.filter_by(comment_id=commentId, user_id=likedUserId).first()
+	if not foundUser:
+		print("yo")
+		commentLike = CommentLike(commentId, likedUserId)
+		db.session.add(commentLike)
+		db.session.commit()
+	return redirect("/imageShow/"+imageId)
+	
+
 

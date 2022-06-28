@@ -22,17 +22,10 @@ html {
 }
 
 img {
-	/*height: 540px;
-	width: 300px;*/
-	
-	/*padding-top: auto;*/
 	display: block;
 	margin: auto;
-	/*margin-top: 1.8vh;*/
 	margin-top: auto;
-	/*margin-bottom: 1.5vh;*/
 	margin-bottom: auto;
-	/*position: absolute;*/
 }
 
 #imgDiv{
@@ -43,6 +36,82 @@ img {
 	justify-content: center;
 	}
 
+#likesListDiv{
+	height: 560px;
+	width: 910px;
+	position: fixed;
+	top: 1.4vh;
+	background-color: rgba(0,0,0,0.7);
+	display: none;
+}
+
+#likesList{
+	position: fixed;
+	width: 500px;
+	padding-bottom: 10px;
+	height: fit-content;
+	max-height: 400px;
+	background-color: #242526;
+	margin-left: 305px;
+	margin-top: 75px;
+	border-radius: 10px;
+	color: #939598;
+	overflow-y: scroll;
+}
+
+#likesList::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#likesList {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#likesHeading{
+	margin-left: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: #4292FF;
+	font-family: Consola;
+}
+
+#closeIconLikes{
+	position: absolute;
+	top: 10px;
+	right: 2.5%;
+}
+
+#likesLine{
+	width: 500px;
+	height: 1px;
+	background-color: #3A3B3C;
+}
+
+.userAccounts{
+	display: flex;
+	height: fit-content;
+}
+
+.userAccounts img{
+	height: 40px;
+	width: 48.5px;
+	border-radius: 90%;
+	margin-top: 10px;
+	margin-left: 25px;
+	margin-right: 1px;
+}
+
+.userAccounts p{
+	margin-left: 10px;
+	margin-top: 20px;
+}
+
+.userAccounts p:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
 
 #likeCommentDiv {
 	height: 560px;
@@ -56,6 +125,7 @@ img {
 	border: 1px solid;
 	margin-left: 20px;
 	padding-left: 20px;
+	/*opacity: 30%;*/
 }
 
 #imageUser {
@@ -121,6 +191,10 @@ p{
 }
 
 .fUser{
+	cursor: pointer;
+}
+
+.oUser{
 	cursor: pointer;
 }
 
@@ -276,6 +350,7 @@ p{
 	background-color: transparent;
 	border-radius: 7.5px;
 }
+
 
 #deleteInputIcon{
 	margin-top: 2.1vh;

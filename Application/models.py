@@ -12,7 +12,7 @@ class User(db.Model):
 	socketId = db.Column(db.String(100))
 	images = db.relationship('Images', backref='User')
 	likedUsers = db.relationship('LikedUsers', backref='User')
-	
+	commentLikedUsers = db.relationship('CommentLike', backref='User')
 
 	def __init__(self, fname, lname, uname, dob, pwd, sockID = None):
 		self.FirstName = fname
@@ -53,13 +53,25 @@ class Comments(db.Model):
 	commentTime = db.Column(db.DateTime)
 	parent_Id = db.Column(db.Integer)
 	image_Id = db.Column(db.Integer)
+	likedComment = db.relationship('CommentLike', backref='Comments')
 
-	def __init__(self, comment, commentedUser, 	commentTime, parentId, imageId):
+
+	def __init__(self, comment, commentedUser, 	commentTime, parentId, imageId, userId=None):
 		self.comment = comment
 		self.commentedUser = commentedUser
 		self.commentTime = commentTime
 		self.parent_Id = parentId
 		self.image_Id = imageId
+
+class CommentLike(db.Model):
+	__tablename__ = 'commentLike'
+	id = db.Column(db.Integer, primary_key=True)
+	comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+	def __init__(self, commentId, userId):
+		self.comment_id = commentId
+		self.user_id = userId
 
 
 

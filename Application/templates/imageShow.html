@@ -33,7 +33,7 @@
 				{% if likes==1 %}
 					<p id="likedUsers">Liked by <b class="fUser">{{details}}</b></p>
 				{% elif likes>=1 %}
-					<p id="likedUsers">Liked by <b class="fUser">{{details}}</b> and <b class="fUser">{{likes-1}} others</b></p>
+					<p id="likedUsers">Liked by <b class="fUser">{{details}}</b> and <b class="oUser">{{likes-1}} others</b></p>
 				{% else %}
 					<p id="noLikes"><b class="fUser">Liked by 0 Users</b></p>
 				{% endif %}
@@ -81,7 +81,7 @@
 						{% if comment['commentReplies'] %}
 							{% for reply in comment['commentReplies'] %}
 								<div class="photoComment reply">
-									<img class="userCommentDP" src="{{url_for('static',filename='profiles/snoop/snoop.jpg')}}">
+									<img class="userCommentDP" src="{{url_for('static',filename=reply['replyUserDP'])}}">
 									<div class="commentOptions">
 										<p id="{{reply.replyID}}" class="comment"><b class="uname" onclick="location.href='/profile/{{reply.replyUser}}'">{{reply.replyUser}} </b> <b class="uname commentReply" onclick="location.href='/profile/{{comment['commentedUser']}}'">{{reply['@comment']}} </b>	{{reply.comment}}</p>	
 										<div class="likeReply">
@@ -94,6 +94,8 @@
 						{% endif %}
 					{% endfor %}
 				{% endif %}
+
+				
 				
 
 			</div>
@@ -111,6 +113,25 @@
 
 		</div>
 	</div>
+	<div id="likesListDiv">
+		<div id="likesList">
+			<p id="likesHeading">Likes</p>
+			<div id="likesLine"></div>
+			{% if photoLikesUsers %}
+				{% for likeddUser in photoLikesUsers %}
+					<div class="userAccounts">
+						<img src="{{url_for('static', filename=likeddUser[1])}}">
+						<p onclick="location.href='/profile/{{likeddUser[2]}}';">{{likeddUser[0]}}</p>
+					</div>
+				{% endfor %}
+			{% endif %}
+			<svg id="closeIconLikes" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+  				<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+			</svg>
+			
+		</div>
+	</div>
+
 	<script type="text/javascript" src="{{url_for('static', filename='js/home.js')}}"></script>
 	<script type="text/javascript" src="{{url_for('static', filename='js/imageShow.js')}}"></script>
 </body>
