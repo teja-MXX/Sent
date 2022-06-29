@@ -27,6 +27,7 @@ h1 {
 	padding-bottom: 0px;
 	padding-right: 15px;
 	box-shadow: 1px 1px 5px 3px #888888;
+	font-family: Consola;
 }
 
 .profile:hover {
@@ -60,7 +61,7 @@ h5 {
 ;
 }
 
-button {
+.addFriendIcon {
 	float: right;
 	margin-top: 20px;
 	margin-left: 15px;
@@ -85,5 +86,45 @@ input {
 	background-color: transparent;
 	background: url(../icons/search.svg) no-repeat 235px;
 	font-family: IBM;
+}
+
+.requests{
+	background-color: white;
+	border: 1px solid;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 1px 1px 5px 3px #888888;
+	padding-bottom: 5px;
+	margin-top: 2.5px;
+}
+
+.requestFrom{
+	margin-left: 15px;
+	font-family: Ubuntu;
+	padding-top: 2px;
+	font-size: 0.9em;
+	font-weight: 600;
+	/*color: #1877F2;*/
+}
+
+.requestButtons{
+	float: left;
+	display: flex;
+	font-size: 0.9em;
+}
+
+.requestButtons button{
+	margin-top: 5px;
+	width: 70px;
+	padding: 3px 10px;
+	margin-left: 15px;
+	font-size: 0.7em;
+	background-color: #41C926;
+	border: none;
+	font-family: Ubuntu;
+}
+
+.requestButtons button:nth-of-type(2){
+	background-color: #E74E5F;
 }
 

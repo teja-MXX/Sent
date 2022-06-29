@@ -25,7 +25,12 @@ function ale(e){
   					searchResultsDiv.classList.toggle('searchResults')
 
   					pElement = document.createElement('p')
-  					pElement.innerText = Object.values(obj)[i]['FirstName'] + " " + Object.values(obj)[i]['LastName']
+  					pElement.innerHTML = Object.values(obj)[i]['FirstName'] + " " + Object.values(obj)[i]['LastName']
+  					subId = document.createElement('sub')
+  					subId.innerHTML = Object.values(obj)[i]['UserName']
+  					brEl = document.createElement('br')
+  					pElement.appendChild(brEl)
+  					pElement.appendChild(subId)
   					if(i === 0){
   						pElement.classList.toggle('firstResult')
   					}
@@ -33,10 +38,12 @@ function ale(e){
   					chatListDiv.append(searchResultsDiv)
 
   					// Chat Select on clicking on Search Result
-  					searchResultss = document.querySelector(".searchResults")
+  					searchResultss = document.querySelectorAll(".searchResults")
 					UserFullName = document.getElementById('UserFullName')
-					searchResultss.addEventListener('click', function(){
-						UserFullName.innerText = searchResultss.firstChild.innerText
+					var k
+					for(k=0; k<searchResultss.length; k++){
+						searchResultss[k].addEventListener('click', function(){
+						UserFullName.innerText = this.firstChild.innerText.split("\n")[1]
 						searchBox.value = ""
 						chatListDiv.innerHTML = ""
 						msgInputDiv = document.getElementById('msgInputDiv')
@@ -45,7 +52,9 @@ function ale(e){
 						chatAreaIcon.remove()
 						chatAreaHeading = document.getElementById('chatAreaHeading')
 						chatAreaHeading.remove()
-					})
+						})	
+					}
+					
   				}
   			})
 	}
@@ -84,16 +93,17 @@ socket.on('msgFromPythonJs', function(data){
 	chatUserName = document.createElement('span')
 	chatUserName.classList.toggle('chatUserName')
 	if(data.sockId != socket.id){
-		p.classList.toggle('receivedMsg')
+		p.style.backgroundColor = '#EFEAE2'
 		chatUserName.innerText = data['from'] + " :    " + data['msg']	
 	}
 	else{
 		chatUserName.innerText = "You" + " :    " + data['msg']
 	}
-
+	jsDate = new Date()
+	jsTime = jsDate.toLocaleTimeString()
 	time = document.createElement('sub')
 	time.classList.toggle('time')
-	time.innerText = "     " + data['time']
+	time.innerText = "     " + jsTime
 	p.appendChild(chatUserName)
 	p.appendChild(time)
 	

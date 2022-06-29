@@ -24,8 +24,9 @@ def searchResults(searchInput):
 		for user in userSearch:
 			if user.UserName == session['uname']:
 				continue
-			users[user.UserName] = {"FirstName" : user.FirstName ,
-											   "LastName" : user.LastName  }
+			users[user.UserName] = {"FirstName": user.FirstName ,
+									"LastName" : user.LastName ,
+									"UserName" : user.UserName	    }
 		jsonData = json.dumps(users)
 		return jsonData
 		
@@ -37,8 +38,9 @@ def searchResults(searchInput):
 			for user in userSearch:
 				if user.UserName == session['uname']:
 					continue
-				users[user.UserName] = {"FirstName" : user.FirstName ,
-											   "LastName" : user.LastName  }
+				users[user.UserName] = {"FirstName": user.FirstName ,
+										"LastName" : user.LastName ,
+										"UserName" : user.UserName }
 			jsonData = json.dumps(users)
 			return jsonData
 

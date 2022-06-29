@@ -27,5 +27,8 @@
 	 2. Viewing list of users who liked the photo .
 	 3. Added likes to Comments in Database. 
 
+29th June 2022
+	1. Added friendRequests feature
+
  
 

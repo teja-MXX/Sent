@@ -1,8 +1,8 @@
 from Application import init_app
-from Application.models import db, User
+from Application.models import db, User, Messages
 from flask_socketio import SocketIO, emit
 from flask import session
-import datetime
+from datetime import datetime
 
 app = init_app()
 socket = SocketIO(app)
@@ -20,15 +20,11 @@ def updateUserSocketID(sockData):
 
 @socket.on('msgFromJsPython')
 def msg(data):
-	print(data)
-
-	data["time"] = datetime.datetime.now()
-	toUser = User.query.filter_by(UserName = data['to']).first()
-	fromUser = User.query.filter_by(UserName = data['from']).first()
-	msgg = Messages(toUser, fromUser, data['time'], data['msg'])
-	db.session.add(msgg)
-	db.session.commit()
-	print(data)
+	fromId = User.query.filter_by(UserName = data['from']).first()
+	toId = User.query.filter_by(UserName = data['to']).first()
+	mesasge = data['msg']
+	time = datetime.now()
+	
 	socket.emit('msgFromPythonJs', data)
 
 

@@ -73,6 +73,41 @@ class CommentLike(db.Model):
 		self.comment_id = commentId
 		self.user_id = userId
 
+class Messages(db.Model):
+	__tablename__ = 'messages'
+	id = db.Column(db.Integer, primary_key=True)
+	from_id = db.Column(db.Integer)
+	to_id = db.Column(db.Integer)
+	message = db.Column(db.String(1000))
+	time = db.Column(db.DateTime)
+
+	def __init__(self, fromId, toId, msg, time):
+		self.from_id = fromId
+		self.to_id = toId
+		self.message = msg
+		self.time = time
+
+class friendRequests(db.Model):
+	__tablename__ = 'friendRequests'
+	id = db.Column(db.Integer, primary_key=True)
+	from_id = db.Column(db.Integer)
+	to_id = db.Column(db.Integer)
+
+	def __init__(self, fromId, toId):
+		self.from_id = fromId
+		self.to_id = toId
+
+class Friends(db.Model):
+	__tablename__ = 'friends'
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer)
+	friend_id = db.Column(db.Integer)
+
+	def __init__(self, userId, friendId):
+		self.user_id = userId
+		self.friend_id = friendId
+
+
 
 
 
